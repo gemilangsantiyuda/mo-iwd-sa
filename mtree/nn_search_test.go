@@ -3,11 +3,11 @@ package mtree_test
 import (
 	"testing"
 
-	"github.com/m-tree/mtree"
 	"github.com/stretchr/testify/assert"
+	"github.com/vroup/mo-iwd-sa/mtree"
 
-	"github.com/m-tree/coordinate"
-	"github.com/m-tree/distance"
+	"github.com/vroup/mo-iwd-sa/coordinate"
+	"github.com/vroup/mo-iwd-sa/distance"
 )
 
 var nnTestCase = struct {

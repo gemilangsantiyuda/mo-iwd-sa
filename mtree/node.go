@@ -1,7 +1,7 @@
 package mtree
 
 import (
-	"github.com/m-tree/coordinate"
+	"github.com/vroup/mo-iwd-sa/coordinate"
 )
 
 // Node is the struct for the m-tree node
@@ -114,4 +114,15 @@ func (node *Node) RemoveEntryWithObjectID(objectID int) {
 			return
 		}
 	}
+}
+
+// GetCentroidIdx on the entrylist of node
+func (node *Node) GetCentroidIdx() int {
+	for idx := range node.EntryList {
+		entry := node.EntryList[idx]
+		if entry == node.CentroidEntry {
+			return idx
+		}
+	}
+	return -1
 }

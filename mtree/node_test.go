@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/m-tree/mtree"
+	"github.com/vroup/mo-iwd-sa/mtree"
 )
 
 func TestInsertAndRemoveEntry(t *testing.T) {

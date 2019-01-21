@@ -3,7 +3,7 @@ package mtree
 import (
 	"math"
 
-	"github.com/m-tree/object"
+	"github.com/vroup/mo-iwd-sa/object"
 )
 
 // Remove an object having objectID from the tree

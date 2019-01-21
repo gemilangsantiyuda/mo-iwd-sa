@@ -1,0 +1,18 @@
+{
+    "delivery_date":"2018-08-16",
+    "max_driver_capacity":40,
+    "max_driver_distance":90000,
+    "max_tree_entry":60,
+    "iwd_parameter":{
+        "maximum_iteration":100,
+        "population_size":10,
+        "as":1000,
+        "bs":0.01,
+        "cs":1,
+        "av":1000,
+        "bv":0.01,
+        "cv":1,
+        "init_soil":1000,
+        "init_vel":100
+    }
+}

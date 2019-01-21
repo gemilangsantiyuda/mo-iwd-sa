@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/m-tree/object"
+	"github.com/vroup/mo-iwd-sa/object"
 )
 
 // An Item is something we manage in a priority queue.

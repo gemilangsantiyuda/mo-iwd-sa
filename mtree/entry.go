@@ -1,6 +1,6 @@
 package mtree
 
-import "github.com/m-tree/coordinate"
+import "github.com/vroup/mo-iwd-sa/coordinate"
 
 // Entry interface
 type Entry interface {

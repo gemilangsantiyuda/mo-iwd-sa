@@ -1,0 +1,12 @@
+{
+    "MaximumIteration":100,
+    "PopulationSize":10,
+    "As":1000,
+    "Bs":0.01,
+    "Cs":1,
+    "Av":1000,
+    "Bv":0.01,
+    "Cv":1,
+    "InitSoil":1000,
+    "InitVel":100
+}

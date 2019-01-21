@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/vroup/mo-iwd-sa/coordinate"
 
-	"github.com/m-tree/coordinate"
-	"github.com/m-tree/distance"
+	"github.com/vroup/mo-iwd-sa/distance"
 )
 
 var testCase = struct {

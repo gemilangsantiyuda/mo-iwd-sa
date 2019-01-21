@@ -3,7 +3,7 @@ package mtree
 import (
 	"math"
 
-	"github.com/m-tree/object"
+	"github.com/vroup/mo-iwd-sa/object"
 )
 
 // Insert make a new leaf entry of the new inserted object then insert it into the fittest leaf node

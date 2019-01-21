@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/m-tree/mtree"
+	"github.com/vroup/mo-iwd-sa/mtree"
 
-	"github.com/m-tree/coordinate"
-	"github.com/m-tree/distance"
+	"github.com/vroup/mo-iwd-sa/coordinate"
+	"github.com/vroup/mo-iwd-sa/distance"
 )
 
 var insertTestCase = struct {
@@ -32,7 +33,7 @@ var insertTestCase = struct {
 		&coordinate.Coordinate{9, 2},
 		&coordinate.Coordinate{9, 3},
 	},
-	maxEntry: 7,
+	maxEntry: 4,
 }
 
 func TestInsertAndRemove(t *testing.T) {
@@ -89,7 +90,7 @@ func traverseAndTest(node *mtree.Node, t *testing.T, subTestIdx int) int {
 		fmt.Println("----->", entry)
 		radius := entry.GetDistanceFromParent() + entry.GetRadius()
 		t.Run("Checking recalculated radius smaller than node's radius", func(t *testing.T) {
-			require.Truef(t, nodeRadius >= radius, "Error! node's radius (%f) smaller than recalculated radius (%f), currentNode = %v,, current subtest : %d", nodeRadius, radius, node, subTestIdx)
+			assert.Truef(t, nodeRadius >= radius, "Error! node's radius (%f) smaller than recalculated radius (%f), currentNode = %v,, current subtest : %d", nodeRadius, radius, node, subTestIdx)
 		})
 	}
 

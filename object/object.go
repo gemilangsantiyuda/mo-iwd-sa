@@ -1,6 +1,6 @@
 package object
 
-import "github.com/m-tree/coordinate"
+import "github.com/vroup/mo-iwd-sa/coordinate"
 
 // Object is temporary interface, as the object entry of m-tree
 type Object interface {

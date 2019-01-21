@@ -5,10 +5,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/m-tree/coordinate"
-	"github.com/m-tree/distance"
-	"github.com/m-tree/mtree"
-	"github.com/m-tree/object"
+	"github.com/vroup/mo-iwd-sa/coordinate"
+	"github.com/vroup/mo-iwd-sa/distance"
+	"github.com/vroup/mo-iwd-sa/mtree"
+	"github.com/vroup/mo-iwd-sa/object"
 )
 
 type DistanceCalculator interface {

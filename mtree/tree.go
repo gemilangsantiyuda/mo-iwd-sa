@@ -1,7 +1,7 @@
 package mtree
 
 import (
-	"github.com/m-tree/object"
+	"github.com/vroup/mo-iwd-sa/object"
 )
 
 // SplitMechanism to make split mechanism open for other option

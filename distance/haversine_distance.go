@@ -3,8 +3,8 @@ package distance
 import (
 	"math"
 
-	"github.com/m-tree/coordinate"
-	"github.com/m-tree/object"
+	"github.com/vroup/mo-iwd-sa/coordinate"
+	"github.com/vroup/mo-iwd-sa/object"
 )
 
 // HaversineDistance repo for haversine distance calculator
