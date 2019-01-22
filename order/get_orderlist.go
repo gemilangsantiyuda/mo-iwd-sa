@@ -68,11 +68,13 @@ func GetOrderList(conf config.Config) []*Order {
 	return orderList
 }
 
+// add idx trailing the excessive order to differentiate them on the edgesoilmap of the iwd
 func splitExcessOrder(order *Order, conf config.Config) []*Order {
 	var orderList []*Order
 	for idx := 1; order.Quantity > conf.MaxDriverCapacity; idx++ {
+		excessiveID := strconv.Itoa(idx)
 		newOrder := &Order{
-			ID:         order.ID,
+			ID:         order.ID + "-" + excessiveID,
 			UserID:     order.UserID,
 			Quantity:   conf.MaxDriverCapacity,
 			Coordinate: order.Coordinate,

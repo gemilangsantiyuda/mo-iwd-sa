@@ -19,7 +19,17 @@ func (kitchen *Kitchen) GetCoordinate() *coordinate.Coordinate {
 	return kitchen.Coordinate
 }
 
-// GetKitchenID return kitchen's id
-func (kitchen *Kitchen) GetKitchenID() string {
+// GetID return kitchen's id
+func (kitchen *Kitchen) GetID() string {
 	return kitchen.ID
+}
+
+// IsKitchen return true
+func (kitchen *Kitchen) IsKitchen() bool {
+	return true
+}
+
+// IsOrder return false
+func (kitchen *Kitchen) IsOrder() bool {
+	return false
 }

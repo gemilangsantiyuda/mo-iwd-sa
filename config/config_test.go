@@ -25,6 +25,11 @@ var testCase = config.Config{
 		InitSoil:         1000,
 		InitVel:          100,
 	},
+	Weight: config.Weight{
+		RiderCost:         0.7,
+		KitchenOptimality: 0.2,
+		UserSatisfaction:  0.1,
+	},
 }
 
 func TestConfig(t *testing.T) {

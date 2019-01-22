@@ -21,3 +21,18 @@ func (order *Order) GetCoordinate() *coordinate.Coordinate {
 func (order *Order) GetUserID() string {
 	return order.UserID
 }
+
+// GetID return order's id
+func (order *Order) GetID() string {
+	return order.ID
+}
+
+// IsKitchen false
+func (order *Order) IsKitchen() bool {
+	return false
+}
+
+// IsOrder true
+func (order *Order) IsOrder() bool {
+	return true
+}
