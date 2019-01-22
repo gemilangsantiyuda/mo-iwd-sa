@@ -21,6 +21,7 @@ func (tree *Tree) Insert(object object.Object, objectID int) {
 	if distanceFromNewEntryToRoot > tree.Root.GetRadius() {
 		tree.Root.SetRadius(distanceFromNewEntryToRoot)
 	}
+	tree.ObjectCount++
 }
 
 func (tree *Tree) insertLeafEntry(currentNode *Node, newLeafEntry *LeafEntry) {

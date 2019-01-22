@@ -6,6 +6,7 @@ import (
 	"math"
 
 	"github.com/vroup/mo-iwd-sa/object"
+	"github.com/vroup/mo-iwd-sa/order"
 )
 
 // An Item is something we manage in a priority queue.
@@ -17,8 +18,8 @@ type Item struct {
 
 // Neighbour entry and its distance to query object
 type Neighbour struct {
-	LeafEntry *LeafEntry
-	Distance  float64
+	Order    *order.Order
+	Distance float64
 }
 
 // A PriorityQueue implements heap.Interface and holds Items.
@@ -56,7 +57,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 }
 
 // KnnSearch return k entry nearest to query object
-func (tree *Tree) KnnSearch(root *Node, queryObject object.Object, k int) []*Neighbour {
+func (tree *Tree) KnnSearch(root *Node, queryObject object.Object, k int, CapacityLeft int, MaxDistance float64) []*Neighbour {
 	var pq PriorityQueue
 	var neighbourList []*Neighbour
 	heap.Init(&pq)
@@ -73,10 +74,17 @@ func (tree *Tree) KnnSearch(root *Node, queryObject object.Object, k int) []*Nei
 		fmt.Println(entry)
 		if _, ok := entry.(*LeafEntry); ok {
 			leafEntry := entry.(*LeafEntry)
+			order := leafEntry.Object.(*order.Order)
+			if order.Quantity > CapacityLeft {
+				continue
+			}
 			distance := item.distance
+			if distance > MaxDistance {
+				continue
+			}
 			neighbour := &Neighbour{
-				LeafEntry: leafEntry,
-				Distance:  distance,
+				Order:    order,
+				Distance: distance,
 			}
 			neighbourList = append(neighbourList, neighbour)
 			continue

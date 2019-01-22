@@ -7,6 +7,7 @@ type Kitchen struct {
 	ID         string
 	Coordinate *coordinate.Coordinate
 	Capacity   *Capacity
+	Preference float64
 }
 
 // Capacity holds kitchen caps info

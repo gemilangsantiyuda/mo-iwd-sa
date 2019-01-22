@@ -26,6 +26,7 @@ func (tree *Tree) Remove(node *Node, object object.Object, objectID int) (remove
 		if distanceToNextNode <= node.GetRadius() {
 			removed := tree.Remove(nextNode, object, objectID)
 			if removed {
+				tree.ObjectCount--
 				return true
 			}
 		}

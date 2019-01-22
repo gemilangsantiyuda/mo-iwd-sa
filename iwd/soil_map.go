@@ -15,6 +15,15 @@ type node interface {
 	IsOrder() bool
 }
 
+// GetCopy return a copy of the map
+func (sm SoilMap) GetCopy() SoilMap {
+	newSM := make(SoilMap)
+	for key, val := range sm {
+		sm[key] = val
+	}
+	return newSM
+}
+
 // GetSoil return soil value of the edge
 func (sm SoilMap) GetSoil(origin, destination node) float64 {
 	key := origin.GetID() + "+" + destination.GetID()
@@ -24,8 +33,8 @@ func (sm SoilMap) GetSoil(origin, destination node) float64 {
 	return sm[key]
 }
 
-// CreateSoilMap initialize soil map
-func CreateSoilMap(kitchenList []*kitchen.Kitchen, orderList []*order.Order, conf config.Config) SoilMap {
+// NewSoilMap initialize soil map
+func NewSoilMap(kitchenList []*kitchen.Kitchen, orderList []*order.Order, conf config.Config) SoilMap {
 	sm := make(SoilMap)
 	iwdParam := conf.IwdParameter
 

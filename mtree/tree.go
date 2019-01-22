@@ -21,4 +21,5 @@ type Tree struct {
 	MaxEntry       int
 	SplitMechanism SplitMechanism
 	DistCalc       DistanceCalculator
+	ObjectCount    int
 }
