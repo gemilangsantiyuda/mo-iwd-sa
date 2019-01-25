@@ -15,6 +15,7 @@ type Route struct {
 	RiderCost        int
 	ServedQty        int
 	CapacityLeft     int
+	TotalRating      float64
 }
 
 // CalcRiderCost recalculate rider cost based

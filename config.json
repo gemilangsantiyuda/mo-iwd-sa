@@ -13,7 +13,8 @@
         "bv":0.01,
         "cv":1,
         "init_soil":1000,
-        "init_vel":100
+        "init_vel":100,
+        "p" : 0.95
     },
     "weight":{
         "rider_cost" : 0.7,

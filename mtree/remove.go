@@ -7,7 +7,7 @@ import (
 )
 
 // Remove an object having objectID from the tree
-func (tree *Tree) Remove(node *Node, object object.Object, objectID int) (removeSuccess bool) {
+func (tree *Tree) Remove(node *Node, object object.Object, objectID string) (removeSuccess bool) {
 
 	if node.IsLeaf() {
 		if node.ContainsObjectID(objectID) {

@@ -5,9 +5,10 @@ import "github.com/vroup/mo-iwd-sa/coordinate"
 // Kitchen holds kitchen info
 type Kitchen struct {
 	ID         string
-	Coordinate *coordinate.Coordinate
 	Capacity   *Capacity
 	Preference float64
+	ServedQty  int
+	Coordinate *coordinate.Coordinate
 }
 
 // Capacity holds kitchen caps info

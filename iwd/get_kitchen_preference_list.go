@@ -2,8 +2,7 @@ package iwd
 
 import "github.com/vroup/mo-iwd-sa/kitchen"
 
-func (wd *WaterDrop) getKitchenPreferenceList() []float64 {
-	kitchenList := wd.KitchenList
+func (wd *WaterDrop) getKitchenPreferenceList(kitchenList []*kitchen.Kitchen) []float64 {
 	var preferenceList []float64
 	for idx := range kitchenList {
 		kitchen := kitchenList[idx]

@@ -8,7 +8,7 @@ import (
 // LeafEntry stores the spatial object
 type LeafEntry struct {
 	Object             object.Object
-	ObjectID           int
+	ObjectID           string
 	Parent             *Node
 	DistanceFromParent float64
 }

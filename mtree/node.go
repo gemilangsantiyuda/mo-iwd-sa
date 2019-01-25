@@ -91,7 +91,7 @@ func (node *Node) IsLeaf() bool {
 }
 
 // ContainsObjectID may only be called by leafNode
-func (node *Node) ContainsObjectID(objectID int) bool {
+func (node *Node) ContainsObjectID(objectID string) bool {
 	for idx := range node.EntryList {
 		leafEntry := node.EntryList[idx].(*LeafEntry)
 		if leafEntry.ObjectID == objectID {
@@ -102,7 +102,7 @@ func (node *Node) ContainsObjectID(objectID int) bool {
 }
 
 // RemoveEntryWithObjectID may only be called by leafNode
-func (node *Node) RemoveEntryWithObjectID(objectID int) {
+func (node *Node) RemoveEntryWithObjectID(objectID string) {
 	for idx := range node.EntryList {
 		entry := node.EntryList[idx].(*LeafEntry)
 		if entry.ObjectID == objectID {

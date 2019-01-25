@@ -8,5 +8,5 @@ type order interface {
 }
 
 type kitchen interface {
-	GetKitchenID() string
+	GetID() string
 }

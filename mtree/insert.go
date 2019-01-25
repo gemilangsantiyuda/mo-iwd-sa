@@ -7,7 +7,7 @@ import (
 )
 
 // Insert make a new leaf entry of the new inserted object then insert it into the fittest leaf node
-func (tree *Tree) Insert(object object.Object, objectID int) {
+func (tree *Tree) Insert(object object.Object, objectID string) {
 
 	newLeafEntry := &LeafEntry{
 		Object:             object,

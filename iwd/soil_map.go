@@ -9,12 +9,6 @@ import (
 // SoilMap hold the soil of edge
 type SoilMap map[string]float64
 
-type node interface {
-	GetID() string
-	IsKitchen() bool
-	IsOrder() bool
-}
-
 // GetCopy return a copy of the map
 func (sm SoilMap) GetCopy() SoilMap {
 	newSM := make(SoilMap)
@@ -33,8 +27,17 @@ func (sm SoilMap) GetSoil(origin, destination node) float64 {
 	return sm[key]
 }
 
+// UpdateSoil renew soil value
+func (sm SoilMap) UpdateSoil(origin, destination node, newSoil float64) {
+	key := origin.GetID() + "+" + destination.GetID()
+	if origin.IsKitchen() {
+		key = "K" + key
+	}
+	sm[key] = newSoil
+}
+
 // NewSoilMap initialize soil map
-func NewSoilMap(kitchenList []*kitchen.Kitchen, orderList []*order.Order, conf config.Config) SoilMap {
+func NewSoilMap(kitchenList []*kitchen.Kitchen, orderList []*order.Order, conf *config.Config) SoilMap {
 	sm := make(SoilMap)
 	iwdParam := conf.IwdParameter
 
