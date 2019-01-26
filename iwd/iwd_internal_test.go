@@ -25,7 +25,7 @@ var configTest = &config.Config{
 		Bv:               0.01,
 		Cv:               1,
 		InitSoil:         1000,
-		InitVel:          100,
+		InitIWDVel:       100,
 	},
 	Weight: config.Weight{
 		RiderCost:         0.7,

@@ -79,7 +79,7 @@ func globalUpdate(soilMap SoilMap, wd *WaterDrop) {
 			nextNode = route.VisitedOrderList[idx]
 			soil := soilMap.GetSoil(currentNode, nextNode)
 			wdSoil := wd.Soil
-			newSoil := (1+iwdParam.P)*soil - 2*iwdParam.P*wdSoil/(orderCount*(orderCount-1))
+			newSoil := (1-iwdParam.P)*soil - 2*iwdParam.P*wdSoil/(orderCount*(orderCount-1))
 			soilMap.UpdateSoil(currentNode, nextNode, newSoil)
 			// fmt.Println("edge ", currentNode.GetID(), " ", nextNode.GetID(), " soil ", soil, " new soil ", newSoil)
 			currentNode = nextNode

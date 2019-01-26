@@ -1,13 +1,13 @@
 {
-    "delivery_date":"2018-01-19",
+    "delivery_date":"2017-10-17",
     "max_driver_capacity":40,
     "max_driver_distance":60000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":6,
+    "neighbour_count":4,
     "max_tree_entry":30,
     "iwd_parameter":{
-        "maximum_iteration":10,
+        "maximum_iteration":100,
         "population_size":10,
         "as":10,
         "bs":0.01,
@@ -15,10 +15,12 @@
         "av":200,
         "bv":0.01,
         "cv":1,
-        "init_soil":1000,
+        "init_soil":3000,
         "init_iwd_vel":0.1,
         "init_iwd_soil":0,
-        "p" : 0.2
+        "p" : 0.4,
+        "min_d_soil":10,
+        "max_d_soil":200
     },
     "weight":{
         "rider_cost" : 0.7,

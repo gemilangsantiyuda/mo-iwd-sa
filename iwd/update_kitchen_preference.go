@@ -12,7 +12,7 @@ func (wd *WaterDrop) updateKitchenPreference() {
 	for idx := range wd.KitchenList {
 		kitchen := wd.KitchenList[idx]
 		servedQty := ksqMap.GetServedQty(kitchen)
-		preference := float64(servedQty) / float64(totalServedQty) / 100.
+		preference := float64(servedQty) / float64(totalServedQty) / 10000.
 		kitchen.Preference += preference
 	}
 }

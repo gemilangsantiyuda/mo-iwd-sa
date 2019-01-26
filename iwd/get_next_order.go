@@ -47,7 +47,7 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 		soilList = append(soilList, soil)
 	}
 	probList := wd.getProbList(soilList)
-	chosenIdx := chooseIdxByRouletteWheel(probList)
+	chosenIdx := chooseIdxByExpRank(probList, 0.6)
 	// fmt.Println("Chosen Idx", chosenIdx)
 	nextOrder, distance, moDistance := neighbourList[chosenIdx].Order, neighbourList[chosenIdx].Distance, moDistanceList[chosenIdx]
 

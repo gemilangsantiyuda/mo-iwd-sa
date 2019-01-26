@@ -1,7 +1,6 @@
 package iwd
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -17,6 +16,11 @@ func (wd *WaterDrop) getDeltaSoil(currentNode, nextNode node, moDistance float64
 	// fmt.Println("moDistance :", moDistance)
 	t := moDistance / math.Max(0.0001, wd.Velocity)
 	dSoil := iwdParam.As / (iwdParam.Bs + (iwdParam.Cs * t))
+	if dSoil < iwdParam.MinDSoil {
+		dSoil = iwdParam.MinDSoil
+	} else if dSoil > iwdParam.MaxDSoil {
+		dSoil = iwdParam.MaxDSoil
+	}
 	return dSoil
 }
 
@@ -25,7 +29,7 @@ func (wd *WaterDrop) updateEdgeSoil(currentNode, nextNode node, dSoil float64) {
 	p := wd.Config.IwdParameter.P
 	edgeSoil := soilMap.GetSoil(currentNode, nextNode)
 	newEdgeSoil := (1-p)*edgeSoil - p*dSoil
-	fmt.Println("deltaSoil", dSoil)
+	// fmt.Println("deltaSoil", dSoil)
 	soilMap.UpdateSoil(currentNode, nextNode, newEdgeSoil)
 
 }

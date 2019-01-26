@@ -1,13 +1,12 @@
 package iwd
 
 import (
-	"fmt"
 	"math"
 )
 
 func (wd *WaterDrop) getProbList(soilList []float64) []float64 {
 
-	fmt.Println("Soil List\n", soilList)
+	// fmt.Println("Soil List\n", soilList)
 
 	minSoil := math.Inf(1)
 	for idx := range soilList {
@@ -37,6 +36,6 @@ func (wd *WaterDrop) getProbList(soilList []float64) []float64 {
 		problist = append(problist, prob)
 	}
 
-	fmt.Println("prob list\n", problist)
+	// fmt.Println("prob list\n", problist)
 	return problist
 }

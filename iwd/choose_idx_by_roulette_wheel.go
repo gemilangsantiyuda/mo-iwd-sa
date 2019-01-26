@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-type rouletteItem struct {
+type probItem struct {
 	Idx  int
 	Prob float64
 }
@@ -17,10 +17,10 @@ func chooseIdxByRouletteWheel(valueList []float64) int {
 		totalValue += val
 	}
 
-	var itemList []rouletteItem
+	var itemList []probItem
 	for idx := range valueList {
 		val := valueList[idx]
-		item := rouletteItem{
+		item := probItem{
 			Idx:  idx,
 			Prob: val / totalValue,
 		}
