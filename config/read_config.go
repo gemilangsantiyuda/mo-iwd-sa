@@ -8,9 +8,9 @@ import (
 )
 
 // ReadConfig return config from config.json file
-func ReadConfig() Config {
+func ReadConfig() *Config {
 	var conf Config
-	file, err := os.Open("../config.json")
+	file, err := os.Open("testConfig.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -21,5 +21,5 @@ func ReadConfig() Config {
 	}
 
 	json.Unmarshal(jsonBytes, &conf)
-	return conf
+	return &conf
 }

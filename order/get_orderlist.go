@@ -13,11 +13,11 @@ import (
 )
 
 // GetOrderList return order list on the delivery date. The order retrieved from the csv first is checked for one that has quantity more than driver's capacity. That particular one will be split to individual orders less equal than the driver's max capacity
-func GetOrderList(conf config.Config) []*Order {
+func GetOrderList(conf *config.Config) []*Order {
 	var orderList []*Order
 
 	csvPath := "Order " + conf.DeliveryDate + ".csv"
-	file, err := ioutil.ReadFile("../prepared data/" + csvPath)
+	file, err := ioutil.ReadFile("prepared data/" + csvPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,7 +69,7 @@ func GetOrderList(conf config.Config) []*Order {
 }
 
 // add idx trailing the excessive order to differentiate them on the edgesoilmap of the iwd
-func splitExcessOrder(order *Order, conf config.Config) []*Order {
+func splitExcessOrder(order *Order, conf *config.Config) []*Order {
 	var orderList []*Order
 	for idx := 1; order.Quantity > conf.MaxDriverCapacity; idx++ {
 		excessiveID := strconv.Itoa(idx)

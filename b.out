@@ -1,0 +1,189 @@
+1000 100
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 1000 1000 1000 1000]
+prob list
+ [0.2 0.2 0.2 0.2 0.2]
+Chosen Idx 4
+1000 100
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 1000 1000 1000 46.7155274324881]
+prob list
+ [0.03936060252426129 0.03936060252426129 0.03936060252426129 0.03936060252426129 0.8425575899029548]
+Chosen Idx 4
+1003.4573395447494 100.9999900001
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[0xc000070390] DistanceTraveled:4 RiderCost:0 ServedQty:2 CapacityLeft:3 TotalRating:5}
+Soil List
+ [1000 1000 1000 1000 1000]
+prob list
+ [0.2 0.2 0.2 0.2 0.2]
+Chosen Idx 2
+1004.1554178828053 121.40157757330533
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[0xc000070390] DistanceTraveled:4 RiderCost:0 ServedQty:2 CapacityLeft:3 TotalRating:5}
+Soil List
+ [1000 1000 46.274984734017586 1000 1000]
+prob list
+ [0.03904739481453679 0.03904739481453679 0.8438104207418529 0.03904739481453679 0.03904739481453679]
+Chosen Idx 2
+1007.3784082457836 101.9999800002
+1009.6520006137378 143.00685638557295
+1007.3784082457836 101.9999800002
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 1000 1000 1000 1000]
+prob list
+ [0.2 0.2 0.2 0.2 0.2]
+Chosen Idx 0
+1009.6520006137378 143.00685638557295
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [46.23836732491897 1000 1000 1000 1000]
+prob list
+ [0.8439147223507879 0.03902131941230303 0.03902131941230303 0.03902131941230303 0.03902131941230303]
+Chosen Idx 0
+1011.3380215879741 102.9999700003
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[0xc0000703c0] DistanceTraveled:3 RiderCost:0 ServedQty:3 CapacityLeft:2 TotalRating:5}
+Soil List
+ [1000 1000 1000]
+prob list
+ [0.3333333333333333 0.3333333333333333 0.3333333333333333]
+Chosen Idx 1
+1015.9793202818631 164.6292413007955
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[0xc0000703c0] DistanceTraveled:3 RiderCost:0 ServedQty:3 CapacityLeft:2 TotalRating:5}
+Soil List
+ [1000 46.20197513539914 1000]
+prob list
+ [0.04229393571468256 0.9154121285706349 0.04229393571468256]
+Chosen Idx 1
+1015.3359424980804 103.9999600004
+1023.1375144860141 186.26865396537093
+1015.3359424980804 103.9999600004
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:3 TotalRating:0}
+Soil List
+ [1000 1000 1000 1000 1000]
+prob list
+ [0.2 0.2 0.2 0.2 0.2]
+Chosen Idx 1
+1023.1375144860141 186.26865396537093
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 1000 1000 1000 1000]
+prob list
+ [0.2 0.2 0.2 0.2 0.2]
+Chosen Idx 2
+1019.3722890695809 104.9999500005
+1029.545860869052 187.26864396547094
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[0xc000070450] DistanceTraveled:5 RiderCost:0 ServedQty:2 CapacityLeft:3 TotalRating:5}
+Soil List
+ [1000 1000 1000 1000 1000]
+prob list
+ [0.2 0.2 0.2 0.2 0.2]
+Chosen Idx 1
+1019.3722890695809 104.9999500005
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 1000 43.912070936114105 1000 1000]
+prob list
+ [0.0373514365372397 0.0373514365372397 0.8505942538510411 0.0373514365372397 0.0373514365372397]
+Chosen Idx 2
+1036.7804250426927 188.26863396557096
+1023.745394074808 127.76754676192157
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[0xc000070450] DistanceTraveled:5 RiderCost:0 ServedQty:2 CapacityLeft:3 TotalRating:5}
+Soil List
+ [43.1271640350412 1000 1000 1000]
+prob list
+ [0.8854401748340758 0.038186608388641394 0.038186608388641394 0.038186608388641394]
+Chosen Idx 0
+1036.7804250426927 188.26863396557096
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 1000 1000 1000]
+prob list
+ [0.25 0.25 0.25 0.25]
+Chosen Idx 1
+1029.5467313833235 150.9494137754248
+1044.0529529867317 189.26862396567097
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[0xc000070360] DistanceTraveled:8 RiderCost:0 ServedQty:3 CapacityLeft:2 TotalRating:5}
+Soil List
+ [1000]
+prob list
+ [1]
+Chosen Idx 0
+1029.5467313833235 150.9494137754248
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000 43.091098453163 1000]
+prob list
+ [0.039672153230139236 0.9206556935397215 0.039672153230139236]
+Chosen Idx 1
+1051.3634398714485 190.26861396577098
+1036.2387505146887 174.1506786129481
+CurrentRoute---->&{ServingKitchen:0xc000070540 VisitedOrderList:[0xc000070360] DistanceTraveled:8 RiderCost:0 ServedQty:3 CapacityLeft:2 TotalRating:5}
+Soil List
+ [43.05503745951906]
+prob list
+ [1]
+Chosen Idx 0
+1051.3634398714485 190.26861396577098
+CurrentRoute---->&{ServingKitchen:0xc000070570 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:3 TotalRating:0}
+Soil List
+ [46.16547075707454 1000]
+prob list
+ [0.9558716443795502 0.044128355620449755]
+Chosen Idx 0
+1043.8219320798862 197.37137129062185
+1059.5067945177273 211.92513383669814
+1043.8219320798862 197.37137129062185
+CurrentRoute---->&{ServingKitchen:0xc0000705a0 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [1000]
+prob list
+ [1]
+Chosen Idx 0
+1059.5067945177273 211.92513383669814
+CurrentRoute---->&{ServingKitchen:0xc0000705a0 VisitedOrderList:[] DistanceTraveled:0 RiderCost:0 ServedQty:0 CapacityLeft:5 TotalRating:0}
+Soil List
+ [42.758423868856624]
+prob list
+ [1]
+Chosen Idx 0
+1051.4446437968793 198.37136129072186
+&{[0xc00007e460 0xc00007e6e0 0xc00007e8c0 0xc00007ea00 0xc00007ebe0 0xc00007edc0] <nil> 0 198.37136129072186 1051.4446437968793 map[KA+10:1000 2+9:1000 4+10:1000 7+5:1000 KB+2:-1.6118706170406005 6+10:1000 8+2:1000 1+7:1000 5+2:1000 10+1:1000 KA+8:1000 1+2:1000 3+8:-4.490185737173414 6+3:1000 6+8:1000 8+7:1000 KB+7:-5.42791337611107 5+1:1000 7+8:1000 4+7:1000 2+6:1000 4+6:1000 5+4:1000 10+4:1000 10+5:1000 KA+1:-4.202863252138801 1+5:1000 1+9:1000 4+9:1000 KC+10:1000 KC+7:1000 2+4:1000 8+5:1000 10+2:1000 10+9:1000 KB+9:1000 5+6:1000 8+4:1000 2+10:-2.908004357684964 2+5:1000 8+6:1000 8+9:1000 KC+1:1000 9+7:1000 KC+4:1000 10+6:1000 KC+6:1000 8+3:1000 KB+4:1000 2+7:1000 3+5:1000 6+1:1000 6+4:1000 6+7:1000 8+1:1000 KA+2:1000 3+6:1000 5+10:1000 7+6:1000 8+10:1000 KB+5:1000 KC+8:1000 2+1:1000 3+4:1000 4+8:1000 9+6:1000 10+3:1000 KA+4:1000 1+6:1000 1+10:1000 4+5:1000 6+2:1000 1+3:1000 KC+3:1000 4+2:1000 7+4:1000 9+10:1000 KC+2:1000 3+7:1000 5+9:1000 9+4:1000 KA+3:1000 7+9:1000 4+3:1000 3+9:1000 KB+6:1000 6+5:-3.354912241337614 KB+1:1000 3+1:1000 4+1:1000 5+7:1000 6+9:1000 7+2:1000 7+3:1000 7+10:1000 1+8:1000 3+2:1000 5+8:1000 9+2:1000 KC+5:1000 KA+5:1000 KC+9:-6.450772195125735 2+8:1000 5+3:1000 9+5:1000 KA+6:-1.9588462081600526 KA+7:1000 KB+3:-3.699035318473169 KB+8:1000 10+7:1000 KA+9:1000 3+10:1000 7+1:1000 9+1:1000 9+8:1000 10+8:1000 KB+10:1000 2+3:1000 9+3:1000 1+4:-5.051270613961573] map[2+A:5 2+B:5 6+A:5 6+B:5 8+A:5 10+B:5 4+C:5 5+C:5 7+B:5 9+A:5 4+B:5 5+A:5 6+C:5 7+A:5 3+A:5 3+B:5 3+C:5 9+C:5 8+C:5 10+A:5 2+C:5 4+A:5 5+B:5 8+B:5 9+B:5 1+A:5 1+C:5 7+C:5 1+B:5 10+C:5] map[A:10 B:12 C:3] [0xc000070360 0xc000070390 0xc0000703c0 0xc0000703f0 0xc000070420 0xc000070450 0xc000070480 0xc0000704b0 0xc0000704e0 0xc000070510] [0xc000070540 0xc000070570 0xc0000705a0] 0xc00004ec40 0xc000084000}
+---------------
+Route 1
+	Serving Kitchen :  B
+	Order visited :
+	-->2,10,
+	Distance Traveled:  8
+	Served Qty:  4
+Route 2
+	Serving Kitchen :  B
+	Order visited :
+	-->3,8,
+	Distance Traveled:  7
+	Served Qty:  5
+Route 3
+	Serving Kitchen :  B
+	Order visited :
+	-->7,
+	Distance Traveled:  4
+	Served Qty:  3
+Route 4
+	Serving Kitchen :  A
+	Order visited :
+	-->6,5,
+	Distance Traveled:  11
+	Served Qty:  5
+Route 5
+	Serving Kitchen :  A
+	Order visited :
+	-->1,4,
+	Distance Traveled:  18
+	Served Qty:  5
+Route 6
+	Serving Kitchen :  C
+	Order visited :
+	-->9,
+	Distance Traveled:  5
+	Served Qty:  3

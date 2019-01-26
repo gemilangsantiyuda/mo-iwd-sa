@@ -7,7 +7,6 @@ type Kitchen struct {
 	ID         string
 	Capacity   *Capacity
 	Preference float64
-	ServedQty  int
 	Coordinate *coordinate.Coordinate
 }
 

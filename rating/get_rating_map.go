@@ -15,7 +15,7 @@ import (
 func GetRatingMap(conf *config.Config) Map {
 	ratingMap := newMap()
 	csvPath := "Rating " + conf.DeliveryDate + ".csv"
-	file, err := ioutil.ReadFile("../prepared data/" + csvPath)
+	file, err := ioutil.ReadFile("prepared data/" + csvPath)
 	if err != nil {
 		log.Fatal(err)
 	}

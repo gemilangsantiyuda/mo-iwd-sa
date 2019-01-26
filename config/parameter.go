@@ -11,6 +11,9 @@ type IwdParameter struct {
 	Bv               float64 `json:"bv`
 	Cv               float64 `json:"cv"`
 	InitSoil         float64 `json:"init_soil"`
-	InitVel          float64 `json:"init_vel"`
+	InitIWDVel       float64 `json:"init_iwd_vel"`
+	InitIWDSoil      float64 `json:"init_iwd_soil"`
 	P                float64 `json:"p"`
+	MinDSoil         float64 `json:"min_d_soil"`
+	MaxDSoil         float64 `json:"max_d_soil"`
 }

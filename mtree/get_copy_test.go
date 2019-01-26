@@ -1,7 +1,6 @@
 package mtree_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -57,7 +56,6 @@ func TestGetCopy(t *testing.T) {
 	expectedNumEntry := 14
 	newTreeNumEntry := traverseAndTest(newTree.Root, t, 0)
 	treeNumEntry = traverseAndTest(tree.Root, t, 0)
-	fmt.Println(treeNumEntry, newTreeNumEntry)
 
 	// Assert 2
 	t.Run("Test num of entry in newTree after removal on tree", func(t *testing.T) {
@@ -67,9 +65,6 @@ func TestGetCopy(t *testing.T) {
 }
 
 func compareNodeByNode(t *testing.T, node *mtree.Node, newNode *mtree.Node) {
-	// fmt.Println(node)
-	// fmt.Println(newNode)
-	// fmt.Println("---------------")
 	t.Run("Compare Radius", func(t *testing.T) {
 		assert.Equalf(t, node.Radius, newNode.Radius, "Error! different radius , expected %f, got %f", node.Radius, newNode.Radius)
 	})

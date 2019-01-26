@@ -42,9 +42,6 @@ func deepCopy(node *Node) *Node {
 	}
 	newNode.EntryList = newEntryList
 	newNode.CentroidEntry = newEntryList[nodeCentroidIdx]
-	// fmt.Println("kwkkw")
-	// fmt.Println(node)
-	// fmt.Println(newNode)
 
 	return &newNode
 }

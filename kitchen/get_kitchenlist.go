@@ -13,10 +13,10 @@ import (
 )
 
 // GetKitchenList return kitchen list from prepared data csv
-func GetKitchenList(conf config.Config) []*Kitchen {
+func GetKitchenList(conf *config.Config) []*Kitchen {
 	var kitchenList []*Kitchen
 	csvPath := "Kitchen " + conf.DeliveryDate + ".csv"
-	file, err := ioutil.ReadFile("../prepared data/" + csvPath)
+	file, err := ioutil.ReadFile("prepared data/" + csvPath)
 	if err != nil {
 		log.Fatal(err)
 	}

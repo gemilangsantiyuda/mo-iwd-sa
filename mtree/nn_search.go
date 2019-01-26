@@ -2,7 +2,6 @@ package mtree
 
 import (
 	"container/heap"
-	"fmt"
 	"math"
 
 	"github.com/vroup/mo-iwd-sa/object"
@@ -71,7 +70,6 @@ func (tree *Tree) KnnSearch(root *Node, queryObject object.Object, k int, Capaci
 	for pq.Len() > 0 && len(neighbourList) < k {
 		item = heap.Pop(&pq).(*Item)
 		entry := item.entry
-		fmt.Println(entry)
 		if _, ok := entry.(*LeafEntry); ok {
 			leafEntry := entry.(*LeafEntry)
 			order := leafEntry.Object.(*order.Order)

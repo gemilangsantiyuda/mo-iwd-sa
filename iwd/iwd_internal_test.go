@@ -124,3 +124,33 @@ func TestSoilMap(t *testing.T) {
 	})
 
 }
+
+var ksqTC = struct {
+	kitchen *kitchen.Kitchen
+	addQty  int
+}{
+	kitchen: kitchenTest[0],
+	addQty:  10,
+}
+
+func TestKitchenServedQtyMap(t *testing.T) {
+	// Arrange
+	ksqMap := NewKitchenServedQtyMap(kitchenTest)
+	kitchen := ksqTC.kitchen
+
+	// Act
+	expectedQty := 0
+	qty := ksqMap.GetServedQty(kitchen)
+	ksqMap.AddQty(kitchen, ksqTC.addQty)
+	newQty := ksqMap.GetServedQty(kitchen)
+	expectedNewQty := ksqTC.addQty
+
+	// Assert
+	t.Run("Test Get Served Qty", func(t *testing.T) {
+		assert.Equalf(t, expectedQty, qty, "Error! expected served qty %d, got %d", expectedQty, qty)
+	})
+	t.Run("Test Add Qty", func(t *testing.T) {
+		assert.Equalf(t, expectedNewQty, newQty, "Error! expected qty after addition %d, got %d", expectedNewQty, newQty)
+	})
+
+}

@@ -6,6 +6,9 @@ type Config struct {
 	MaxDriverCapacity int          `json:"max_driver_capacity"`
 	MaxDriverDistance float64      `json:"max_driver_distance"`
 	MaxTreeEntry      int          `json:"max_tree_entry"`
+	DriverSpeed       float64      `json:"driver_speed"`
+	DriverRate        int          `json:"driver_rate"`
+	NeighbourCount    int          `json:"neighbour_count"`
 	IwdParameter      IwdParameter `json:"iwd_parameter"`
 	Weight            Weight       `json:"weight"	`
 }

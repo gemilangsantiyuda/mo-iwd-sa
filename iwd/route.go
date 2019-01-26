@@ -3,6 +3,7 @@ package iwd
 import (
 	"math"
 
+	"github.com/vroup/mo-iwd-sa/config"
 	"github.com/vroup/mo-iwd-sa/kitchen"
 	"github.com/vroup/mo-iwd-sa/order"
 )
@@ -19,7 +20,7 @@ type Route struct {
 }
 
 // CalcRiderCost recalculate rider cost based
-func (route *Route) CalcRiderCost() {
-	duration := int(math.Ceil(route.DistanceTraveled / 30000.))
-	route.RiderCost = duration * 25000
+func (route *Route) CalcRiderCost(config *config.Config) {
+	duration := int(math.Ceil(route.DistanceTraveled / config.DriverSpeed))
+	route.RiderCost = duration * config.DriverRate
 }

@@ -12,7 +12,6 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	soilMap := wd.SoilMap
 	maxDistance := conf.MaxDriverDistance - currentRoute.DistanceTraveled
 	maxCap := currentRoute.CapacityLeft
-	neighbourList := tree.KnnSearch(tree.Root, currentNode, 5, maxCap, maxDistance)
 	servedQty := currentRoute.ServedQty
 	servingKitchen := currentRoute.ServingKitchen
 
@@ -22,10 +21,16 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	kitchenOpt := 0.
 	userRating := 0.
 
+	neighbourList := tree.KnnSearch(tree.Root, currentNode, conf.NeighbourCount, maxCap, maxDistance)
+	if len(neighbourList) == 0 {
+		// no neighbour found feasible
+		return nil, 0, 0
+	}
+	// fmt.Printf("CurrentRoute---->%+v\n", currentRoute)
 	for idx := range neighbourList {
 		neighbour := neighbourList[idx]
 		order := neighbour.Order
-		distance = neighbour.Distance / 90000
+		distance = neighbour.Distance
 		newQty := servedQty + order.Quantity
 		if newQty <= servingKitchen.Capacity.Optimum {
 			difQty := math.Max(float64(servingKitchen.Capacity.Optimum-newQty), float64(conf.MaxDriverCapacity))
@@ -35,7 +40,7 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 			kitchenOpt = difQty / float64(conf.MaxDriverCapacity)
 		}
 		userRating = wd.RatingMap.GetOrderToKitchenRating(order, servingKitchen) / 5.
-		moDistance := calcMoDistance(distance, kitchenOpt, userRating, &conf.Weight)
+		moDistance := calcMoDistance(distance/wd.Config.MaxDriverDistance, kitchenOpt, userRating, &conf.Weight)
 		moDistanceList = append(moDistanceList, moDistance)
 
 		soil := soilMap.GetSoil(currentNode, order)
@@ -43,40 +48,8 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	}
 	probList := wd.getProbList(soilList)
 	chosenIdx := chooseIdxByRouletteWheel(probList)
+	// fmt.Println("Chosen Idx", chosenIdx)
 	nextOrder, distance, moDistance := neighbourList[chosenIdx].Order, neighbourList[chosenIdx].Distance, moDistanceList[chosenIdx]
 
 	return nextOrder, distance, moDistance
-}
-
-func (wd *WaterDrop) getProbList(soilList []float64) []float64 {
-
-	minSoil := math.Inf(1)
-	for idx := range soilList {
-		minSoil = math.Min(soilList[idx], minSoil)
-	}
-
-	var gSoilList []float64
-	for idx := range soilList {
-		gSoil := soilList[idx]
-		if minSoil < 0 {
-			gSoil -= minSoil
-		}
-		gSoilList = append(gSoilList)
-	}
-
-	var fSoilList []float64
-	totalfSoil := 0.
-	for idx := range gSoilList {
-		fSoil := 1 / (0.0001 + gSoilList[idx])
-		fSoilList = append(fSoilList, fSoil)
-		totalfSoil += fSoil
-	}
-
-	var problist []float64
-	for idx := range fSoilList {
-		prob := fSoilList[idx] / totalfSoil
-		problist = append(problist, prob)
-	}
-
-	return problist
 }
