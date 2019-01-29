@@ -1,6 +1,9 @@
 package mtree
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/vroup/mo-iwd-sa/coordinate"
 )
 
@@ -106,7 +109,10 @@ func (node *Node) RemoveEntryWithObjectID(objectID string) {
 	for idx := range node.EntryList {
 		entry := node.EntryList[idx].(*LeafEntry)
 		if entry.ObjectID == objectID {
-			node.EntryList = append(node.EntryList[:idx], node.EntryList[idx+1:]...)
+			// node.EntryList = append(node.EntryList[:idx], node.EntryList[idx+1:]...)
+			copy(node.EntryList[idx:], node.EntryList[idx+1:])
+			node.EntryList[len(node.EntryList)-1] = nil // or the zero value of T
+			node.EntryList = node.EntryList[:len(node.EntryList)-1]
 			if entry == node.CentroidEntry {
 				node.SetCentroidEntry(nil)
 			}
@@ -114,6 +120,8 @@ func (node *Node) RemoveEntryWithObjectID(objectID string) {
 			return
 		}
 	}
+	fmt.Println("remove fail bro")
+	log.Fatal()
 }
 
 // GetCentroidIdx on the entrylist of node

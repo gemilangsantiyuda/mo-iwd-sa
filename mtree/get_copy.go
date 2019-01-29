@@ -8,6 +8,7 @@ func (tree *Tree) GetCopy() *Tree {
 		MaxEntry:       tree.MaxEntry,
 		SplitMechanism: tree.SplitMechanism,
 		DistCalc:       tree.DistCalc,
+		ObjectCount:    tree.ObjectCount,
 	}
 	return newTree
 }

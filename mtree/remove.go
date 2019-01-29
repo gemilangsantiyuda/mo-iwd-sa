@@ -9,24 +9,31 @@ import (
 // Remove an object having objectID from the tree
 func (tree *Tree) Remove(node *Node, object object.Object, objectID string) (removeSuccess bool) {
 
-	if node.IsLeaf() {
-		if node.ContainsObjectID(objectID) {
-			node.RemoveEntryWithObjectID(objectID)
-			// repair node after removal of entry
-			tree.repairNode(node)
-			return true
-		}
-		return false
-	}
-
 	// Check all covered node and traverse them until removeSuccess
 	for idx := range node.EntryList {
+		entry := node.EntryList[idx]
+		if _, isLeafEntry := entry.(*LeafEntry); isLeafEntry {
+			lEntry := entry.(*LeafEntry)
+			if lEntry.ObjectID == objectID {
+				node.EntryList = append(node.EntryList[:idx], node.EntryList[idx+1:]...)
+				if entry == node.CentroidEntry {
+					node.SetCentroidEntry(nil)
+				}
+				entry.SetParent(nil)
+				tree.repairNode(node)
+				return true
+			}
+			continue
+		}
+
 		nextNode := node.EntryList[idx].(*Node)
 		distanceToNextNode := tree.DistCalc.GetDistance(object, nextNode)
 		if distanceToNextNode <= node.GetRadius() {
 			removed := tree.Remove(nextNode, object, objectID)
 			if removed {
-				tree.ObjectCount--
+				if node == tree.Root {
+					tree.ObjectCount--
+				}
 				return true
 			}
 		}

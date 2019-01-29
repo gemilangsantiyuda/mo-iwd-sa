@@ -27,7 +27,7 @@ func (hd *HaversineDistance) calculateCoordHaversineDistance(coordOrigin, coordD
 	R := 6372800.00000000 // Approximation of earth radius in meter
 	a := math.Sin(DY/2)*math.Sin(DY/2) + math.Cos(Y1)*math.Cos(Y2)*math.Sin(DX/2)*math.Sin(DX/2)
 	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
-	return R * c
+	return R * c * 5. / 4.
 }
 
 // GetDistanceMatrix returns distance matrix

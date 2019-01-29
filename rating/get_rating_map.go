@@ -14,7 +14,7 @@ import (
 // GetRatingMap read rating csv on this date and return a map out of it
 func GetRatingMap(conf *config.Config) Map {
 	ratingMap := newMap()
-	csvPath := "Rating " + conf.DeliveryDate + ".csv"
+	csvPath := "Rating " + conf.DataSize + ".csv"
 	file, err := ioutil.ReadFile("prepared data/" + csvPath)
 	if err != nil {
 		log.Fatal(err)

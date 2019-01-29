@@ -16,7 +16,7 @@ import (
 func GetOrderList(conf *config.Config) []*Order {
 	var orderList []*Order
 
-	csvPath := "Order " + conf.DeliveryDate + ".csv"
+	csvPath := "Order " + conf.DataSize + ".csv"
 	file, err := ioutil.ReadFile("prepared data/" + csvPath)
 	if err != nil {
 		log.Fatal(err)

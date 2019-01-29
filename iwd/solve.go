@@ -3,6 +3,7 @@ package iwd
 import (
 	"fmt"
 	"math"
+	"math/rand"
 
 	"github.com/vroup/mo-iwd-sa/config"
 	"github.com/vroup/mo-iwd-sa/kitchen"
@@ -33,6 +34,12 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			UserSatisfaction:  math.Inf(1),
 		}
 
+		// if iter < 50 {
+		// 	config.NeighbourCount = 1
+		// } else {
+		// 	config.NeighbourCount = rand.Intn(4) + 2
+		// }
+
 		// As long as there is a water drop not finished traversing, then traverse the unfinisheds 1 by 1 , 1 step at a time
 		for len(workingWaterDrops) > 0 {
 			workingWaterDrops, finishedWaterDrops = nextStepWD(workingWaterDrops, finishedWaterDrops)
@@ -44,11 +51,33 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			wd.updateKitchenPreference()
 			if wd.hasValidRouteList() {
 				wd.calcScore()
+				// mutate water drop and replace based on SA
+				swapCount := 1
+				mutationWD := wd.getMutation(swapCount)
+				if mutationWD.hasValidRouteList() {
+					mutationWD.calcScore()
+					if wd.Score.IsWorseThan(mutationWD.Score) {
+						wd = mutationWD
+					} else {
+						fmt.Print(iter)
+						prob := getSAProb(mutationWD.Score, wd.Score, config)
+						r := rand.Float64()
+						if r <= prob {
+							wd = mutationWD
+						}
+					}
+
+				}
+
 				if localBestScore.IsWorseThan(wd.Score) {
 					localBestScore = wd.Score
 					localBestWD = wd
 				}
+			} else {
+				// the iwd create invalid routelist,, then restore the updated soil parameter
+				wd.restoreRemovedSoil()
 			}
+			updateTemperature(config)
 		}
 
 		if localBestWD != nil {
@@ -66,23 +95,4 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 	}
 
 	return bestWD
-}
-
-func globalUpdate(soilMap SoilMap, wd *WaterDrop) {
-	iwdParam := wd.Config.IwdParameter
-	orderCount := float64(len(wd.OrderList))
-	var currentNode, nextNode node
-	for rIdx := range wd.RouteList {
-		route := wd.RouteList[rIdx]
-		currentNode = route.ServingKitchen
-		for idx := range route.VisitedOrderList {
-			nextNode = route.VisitedOrderList[idx]
-			soil := soilMap.GetSoil(currentNode, nextNode)
-			wdSoil := wd.Soil
-			newSoil := (1-iwdParam.P)*soil - 2*iwdParam.P*wdSoil/(orderCount*(orderCount-1))
-			soilMap.UpdateSoil(currentNode, nextNode, newSoil)
-			// fmt.Println("edge ", currentNode.GetID(), " ", nextNode.GetID(), " soil ", soil, " new soil ", newSoil)
-			currentNode = nextNode
-		}
-	}
 }

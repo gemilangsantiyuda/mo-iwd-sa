@@ -10,9 +10,10 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	conf := wd.Config
 	tree := wd.Tree
 	soilMap := wd.SoilMap
-	maxDistance := conf.MaxDriverDistance - currentRoute.DistanceTraveled
-	maxCap := currentRoute.CapacityLeft
-	servedQty := currentRoute.ServedQty
+	maxDistance := conf.MaxDriverDistance - currentRoute.GetDistanceTraveled()
+	ksqMap := wd.KitchenServedQtyMap
+	maxCap := currentRoute.GetCapacityLeft(ksqMap, wd.Config)
+	servedQty := currentRoute.GetServedQty()
 	servingKitchen := currentRoute.ServingKitchen
 
 	var moDistanceList []float64
@@ -21,7 +22,8 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	kitchenOpt := 0.
 	userRating := 0.
 
-	neighbourList := tree.KnnSearch(tree.Root, currentNode, conf.NeighbourCount, maxCap, maxDistance)
+	neighbourCount := conf.NeighbourCount
+	neighbourList := tree.KnnSearch(tree.Root, currentNode, neighbourCount, maxCap, maxDistance)
 	if len(neighbourList) == 0 {
 		// no neighbour found feasible
 		return nil, 0, 0
@@ -47,7 +49,7 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 		soilList = append(soilList, soil)
 	}
 	probList := wd.getProbList(soilList)
-	chosenIdx := chooseIdxByExpRank(probList, 0.6)
+	chosenIdx := chooseIdxByRouletteWheel(probList)
 	// fmt.Println("Chosen Idx", chosenIdx)
 	nextOrder, distance, moDistance := neighbourList[chosenIdx].Order, neighbourList[chosenIdx].Distance, moDistanceList[chosenIdx]
 

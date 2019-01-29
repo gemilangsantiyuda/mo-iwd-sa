@@ -10,10 +10,13 @@ func (wd *WaterDrop) visitOrder(currentRoute *Route, currentNode node, nextOrder
 
 	currentRoute.VisitedOrderList = append(currentRoute.VisitedOrderList, nextOrder)
 	tree.Remove(tree.Root, nextOrder, nextOrder.ID)
-	currentRoute.CapacityLeft -= nextOrder.Quantity
-	currentRoute.DistanceTraveled += distance
-	currentRoute.TotalRating += rtMap.GetOrderToKitchenRating(nextOrder, servingKitchen)
-	currentRoute.ServedQty += nextOrder.Quantity
+	distance += currentRoute.GetDistanceTraveled()
+	currentRoute.DistanceList = append(currentRoute.DistanceList, distance)
+	rating := rtMap.GetOrderToKitchenRating(nextOrder, servingKitchen)
+	rating += currentRoute.GetTotalRating()
+	currentRoute.RatingList = append(currentRoute.RatingList, rating)
+	servedQty := nextOrder.Quantity + currentRoute.GetServedQty()
+	currentRoute.ServedQtyList = append(currentRoute.ServedQtyList, servedQty)
 	ksqMap.AddQty(servingKitchen, nextOrder.Quantity)
 	wd.updateDynamicParameter(currentNode, nextOrder, moDistance)
 }

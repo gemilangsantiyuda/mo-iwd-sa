@@ -10,15 +10,8 @@ func (wd *WaterDrop) createNewRoute() *Route {
 		return nil
 	}
 
-	capacityLeft := wd.Config.MaxDriverCapacity
-	ksqMap := wd.KitchenServedQtyMap
-	kitchenCapLeft := servingKitchen.Capacity.Maximum - ksqMap.GetServedQty(servingKitchen)
-	if capacityLeft > kitchenCapLeft {
-		capacityLeft = kitchenCapLeft
-	}
 	route := &Route{
 		ServingKitchen: servingKitchen,
-		CapacityLeft:   capacityLeft,
 	}
 	return route
 }

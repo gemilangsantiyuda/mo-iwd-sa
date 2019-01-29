@@ -1,6 +1,7 @@
 package mtree
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/vroup/mo-iwd-sa/object"
@@ -22,6 +23,7 @@ func (tree *Tree) Insert(object object.Object, objectID string) {
 		tree.Root.SetRadius(distanceFromNewEntryToRoot)
 	}
 	tree.ObjectCount++
+	fmt.Println(tree.ObjectCount)
 }
 
 func (tree *Tree) insertLeafEntry(currentNode *Node, newLeafEntry *LeafEntry) {

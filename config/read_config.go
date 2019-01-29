@@ -10,7 +10,7 @@ import (
 // ReadConfig return config from config.json file
 func ReadConfig() *Config {
 	var conf Config
-	file, err := os.Open("testConfig.json")
+	file, err := os.Open("config.json")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -26,3 +26,12 @@ func (ksqMap KitchenServedQtyMap) AddQty(kitchen *kitchen.Kitchen, addQty int) {
 	key := kitchen.GetID()
 	ksqMap[key] += addQty
 }
+
+// GetCopy deep copy the ksqMap
+func (ksqMap KitchenServedQtyMap) GetCopy() KitchenServedQtyMap {
+	newKsqMap := make(KitchenServedQtyMap)
+	for key, val := range ksqMap {
+		newKsqMap[key] = val
+	}
+	return newKsqMap
+}

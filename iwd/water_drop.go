@@ -38,7 +38,7 @@ func (wd *WaterDrop) calcScore() {
 	for idx := range wd.RouteList {
 		route := wd.RouteList[idx]
 		totalRiderCost += route.RiderCost
-		totalUserRating += route.TotalRating
+		totalUserRating += route.GetTotalRating()
 	}
 
 	totalUserRating = float64(len(wd.OrderList)) / totalUserRating

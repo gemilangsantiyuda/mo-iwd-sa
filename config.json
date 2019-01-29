@@ -1,24 +1,38 @@
 {
-    "delivery_date":"2017-08-16",
+    "data_size":"large",
     "max_driver_capacity":40,
     "max_driver_distance":90000,
-    "max_tree_entry":60,
+    "driver_speed":30000,
+    "driver_rate":25000,
+    "neighbour_count":3,
+    "max_tree_entry":200,
     "iwd_parameter":{
-        "maximum_iteration":100,
-        "population_size":10,
-        "as":1000,
+        "maximum_iteration":10000,
+        "population_size":15,
+        "as":1,
         "bs":0.01,
         "cs":1,
-        "av":1000,
+        "av":0.01,
         "bv":0.01,
         "cv":1,
-        "init_soil":1000,
-        "init_vel":100,
-        "p" : 0.95
+        "init_soil":1,
+        "init_iwd_vel":4,
+        "init_iwd_soil":0,
+        "p" : 0.8,
+        "min_d_soil":-99999999,
+        "max_d_soil":9999999
     },
     "weight":{
-        "rider_cost" : 0.7,
-        "kitchen_optimality":0.2,
+        "rider_cost" : 0.6,
+        "kitchen_optimality":0.3,
         "user_satisfaction":0.1
+    },
+    "sa_parameter":{
+        "temp":{
+            "rider_cost":50000,
+            "kitchen_optimality":200,
+            "user_satisfaction":0.4
+        },
+        "cooling_rate": 0.99992
     }
 }

@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/vroup/mo-iwd-sa/config"
 	"github.com/vroup/mo-iwd-sa/distance"
@@ -20,6 +22,8 @@ func main() {
 	distCalc := &distance.HaversineDistance{}
 	tree := mtree.NewTree(config.MaxTreeEntry, nil, distCalc)
 
+	rand.Seed(time.Now().UTC().UnixNano())
+
 	for idx := range orderList {
 		order := orderList[idx]
 		id := order.ID
@@ -27,6 +31,9 @@ func main() {
 	}
 
 	bestWD := iwd.Solve(orderList, kitchenList, ratingMap, tree, config)
+	if bestWD == nil {
+		return
+	}
 	fmt.Println(bestWD.Soil)
 	fmt.Println("---------------")
 	for idx := range bestWD.RouteList {
@@ -40,8 +47,8 @@ func main() {
 			fmt.Print(order.ID, ",")
 		}
 		fmt.Println()
-		fmt.Println("	Distance Traveled: ", route.DistanceTraveled)
-		fmt.Println("	Served Qty: ", route.ServedQty)
+		fmt.Println("	Distance Traveled: ", route.GetDistanceTraveled())
+		fmt.Println("	Served Qty: ", route.GetServedQty())
 	}
 	fmt.Println("-----------------")
 
