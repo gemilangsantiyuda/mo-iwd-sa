@@ -15,6 +15,13 @@ import (
 // Solve the mdovrp returning the best waterdrop
 func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, config *config.Config) *WaterDrop {
 
+<<<<<<< HEAD
+=======
+	bestArchive := &Archive{
+		ElementList: make([]*ArchiveElement, 0),
+	}
+
+>>>>>>> iwd-sa with SPEA 2
 	soilMap := NewSoilMap(kitchenList, orderList, config)
 	var bestWD *WaterDrop
 	var bestScore = &Score{
@@ -34,6 +41,12 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			UserSatisfaction:  math.Inf(1),
 		}
 
+<<<<<<< HEAD
+=======
+		localArchive := &Archive{
+			ElementList: make([]*ArchiveElement, 0),
+		}
+>>>>>>> iwd-sa with SPEA 2
 		// if iter < 50 {
 		// 	config.NeighbourCount = 1
 		// } else {
@@ -56,10 +69,16 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 				mutationWD := wd.getMutation(swapCount)
 				if mutationWD.hasValidRouteList() {
 					mutationWD.calcScore()
+<<<<<<< HEAD
 					if wd.Score.IsWorseThan(mutationWD.Score) {
 						wd = mutationWD
 					} else {
 						fmt.Print(iter)
+=======
+					if mutationWD.Score.IsDominate(wd.Score, config.Tolerance) {
+						wd = mutationWD
+					} else {
+>>>>>>> iwd-sa with SPEA 2
 						prob := getSAProb(mutationWD.Score, wd.Score, config)
 						r := rand.Float64()
 						if r <= prob {
@@ -69,6 +88,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 
 				}
 
+<<<<<<< HEAD
 				if localBestScore.IsWorseThan(wd.Score) {
 					localBestScore = wd.Score
 					localBestWD = wd
@@ -80,18 +100,59 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			updateTemperature(config)
 		}
 
+=======
+				// if wd.Score.IsDominate(localBestScore, config.Tolerance) {
+				// 	localBestScore = wd.Score
+				// 	localBestWD = wd
+				// }
+				archiveE := &ArchiveElement{
+					Wd: wd,
+				}
+				localArchive.ElementList = append(localArchive.ElementList, archiveE)
+			} //else {
+			// 	// the iwd create invalid routelist,, then restore the updated soil parameter
+			// 	wd.restoreRemovedSoil()
+			// }
+		}
+
+		localArchive.Update(config.IwdParameter.PopulationSize)
+		fmt.Println(len(localArchive.ElementList))
+		if len(localArchive.ElementList) > 0 {
+			localBestWD = localArchive.ElementList[0].Wd
+			localBestScore = localBestWD.Score
+		} else {
+			localBestWD = nil
+		}
+>>>>>>> iwd-sa with SPEA 2
 		if localBestWD != nil {
 			globalUpdate(soilMap, localBestWD)
 		}
 
+<<<<<<< HEAD
 		if bestScore.IsWorseThan(localBestScore) {
+=======
+		bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
+		bestArchive.Update(config.ArchiveSize)
+
+		if localBestScore.IsDominate(bestScore, config.Tolerance) {
+>>>>>>> iwd-sa with SPEA 2
 			bestScore = localBestScore
 			bestWD = localBestWD
 		}
 		// if best score found then renew bestwd
+<<<<<<< HEAD
 		fmt.Printf("Local Best Score %+v \n", localBestScore)
 		fmt.Printf("Best Score %+v \n", bestScore)
 
+=======
+		// fmt.Printf("Local Best Score %+v \n", localBestScore)
+		// fmt.Printf("Best Score %+v \n", bestScore)
+		fmt.Println("Best Archive Iteration ", iter)
+		for arIdx := range bestArchive.ElementList {
+			fmt.Printf("%+v\n", bestArchive.ElementList[arIdx].Wd.Score)
+		}
+		updateTemperature(config)
+>>>>>>> iwd-sa with SPEA 2
 	}
 
 	return bestWD

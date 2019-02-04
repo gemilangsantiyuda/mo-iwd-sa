@@ -17,7 +17,11 @@ var gsTestCase = struct {
 
 func TestGS(t *testing.T) {
 	// Arrange
+<<<<<<< HEAD
 	for _ = range gsTestCase.valueList {
+=======
+	for range gsTestCase.valueList {
+>>>>>>> iwd-sa with SPEA 2
 		idx := chooseIdxByExpRank(gsTestCase.valueList, 0.6)
 		fmt.Println(idx)
 	}

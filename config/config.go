@@ -12,4 +12,9 @@ type Config struct {
 	IwdParameter      IwdParameter `json:"iwd_parameter"`
 	Weight            Weight       `json:"weight"`
 	SaParam           SaParameter  `json:"sa_parameter"`
+<<<<<<< HEAD
+=======
+	Tolerance         Tolerance    `json:"tolerance"`
+	ArchiveSize       int          `json:"archive_size"`
+>>>>>>> iwd-sa with SPEA 2
 }

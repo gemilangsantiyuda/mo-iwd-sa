@@ -1,14 +1,26 @@
 {
+<<<<<<< HEAD
     "data_size":"large",
+=======
+    "data_size":"medium",
+>>>>>>> iwd-sa with SPEA 2
     "max_driver_capacity":40,
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
+<<<<<<< HEAD
     "neighbour_count":3,
     "max_tree_entry":200,
     "iwd_parameter":{
         "maximum_iteration":10000,
         "population_size":15,
+=======
+    "neighbour_count":5,
+    "max_tree_entry":40,
+    "iwd_parameter":{
+        "maximum_iteration":10000,
+        "population_size":10,
+>>>>>>> iwd-sa with SPEA 2
         "as":1,
         "bs":0.01,
         "cs":1,
@@ -18,14 +30,24 @@
         "init_soil":1,
         "init_iwd_vel":4,
         "init_iwd_soil":0,
+<<<<<<< HEAD
         "p" : 0.8,
+=======
+        "p" : 0.9,
+>>>>>>> iwd-sa with SPEA 2
         "min_d_soil":-99999999,
         "max_d_soil":9999999
     },
     "weight":{
+<<<<<<< HEAD
         "rider_cost" : 0.6,
         "kitchen_optimality":0.3,
         "user_satisfaction":0.1
+=======
+        "rider_cost" : 0.8,
+        "kitchen_optimality":0.15,
+        "user_satisfaction":0.05
+>>>>>>> iwd-sa with SPEA 2
     },
     "sa_parameter":{
         "temp":{
@@ -34,5 +56,15 @@
             "user_satisfaction":0.4
         },
         "cooling_rate": 0.99992
+<<<<<<< HEAD
     }
+=======
+    },
+    "tolerance": {
+        "rider_cost":24999,
+        "kitchen_optimality":20,
+        "user_satisfaction":0.005
+    },
+    "archive_size":15
+>>>>>>> iwd-sa with SPEA 2
 }
