@@ -8,11 +8,7 @@ type IwdParameter struct {
 	Bs               float64 `json:"bs"`
 	Cs               float64 `json:"cs"`
 	Av               float64 `json:"av"`
-<<<<<<< HEAD
-	Bv               float64 `json:"bv`
-=======
 	Bv               float64 `json:"bv"`
->>>>>>> iwd-sa with SPEA 2
 	Cv               float64 `json:"cv"`
 	InitSoil         float64 `json:"init_soil"`
 	InitIWDVel       float64 `json:"init_iwd_vel"`

@@ -22,6 +22,9 @@ func (ar *Archive) Update(maxSize int) {
 	if len(ar.ElementList) < 2 {
 		return
 	}
+	if maxSize > len(ar.ElementList) {
+		maxSize = len(ar.ElementList)
+	}
 
 	SFit := make([]float64, len(ar.ElementList))
 	for idx1 := range ar.ElementList {
@@ -54,25 +57,31 @@ func (ar *Archive) Update(maxSize int) {
 		ar.ElementList[idx].Fitness = RFit[idx] + 1/(diffMatrix[idx][1]+2)
 	}
 
-	for len(ar.ElementList) > maxSize {
-		removedIdx := getElementIdxToRemove(ar, diffMatrix)
-		// if removedIdx == -1 {
-		// 	break
-		// }
-		// ar[removedIdx] = nil
-		ar.ElementList = append(ar.ElementList[:removedIdx], ar.ElementList[removedIdx+1:]...)
-		// copy(ar[removedIdx:], ar[removedIdx+1:])
-		// ar[len(ar)-1] = nil // or the zero value of T
-		// ar = ar[:len(ar)-1]
-
-		if len(ar.ElementList) > maxSize {
-			diffMatrix = calcDiffMatrix(ar)
-		}
-	}
-
 	sort.Slice(ar.ElementList, func(i, j int) bool {
 		return ar.ElementList[i].Fitness < ar.ElementList[j].Fitness
 	})
+
+	// remove the wd with fitness > 1 , if less then maxsize got then add the remaining until = maxsize
+	badIdx := -1
+	for idx := range ar.ElementList {
+		if ar.ElementList[idx].Fitness >= 1 {
+			badIdx = idx
+			break
+		}
+	}
+	if badIdx != -1 {
+		if badIdx < maxSize {
+			badIdx = maxSize
+		}
+		ar.ElementList = ar.ElementList[:badIdx]
+	}
+
+	for len(ar.ElementList) > maxSize {
+		diffMatrix = calcDiffMatrix(ar)
+		removedIdx := getElementIdxToRemove(ar, diffMatrix)
+		ar.ElementList = append(ar.ElementList[:removedIdx], ar.ElementList[removedIdx+1:]...)
+	}
+
 }
 
 func getElementIdxToRemove(archive *Archive, diffMatrix [][]float64) int {

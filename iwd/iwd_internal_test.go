@@ -11,11 +11,7 @@ import (
 )
 
 var configTest = &config.Config{
-<<<<<<< HEAD
-	DeliveryDate:      "2018-08-16",
-=======
 	DataSize:          "2018-08-16",
->>>>>>> iwd-sa with SPEA 2
 	MaxDriverCapacity: 5,
 	MaxDriverDistance: 30,
 	MaxTreeEntry:      4,

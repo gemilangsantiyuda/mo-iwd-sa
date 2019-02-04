@@ -5,7 +5,7 @@
     "driver_speed":30000,
     "driver_rate":25000,
     "neighbour_count":3,
-    "max_tree_entry":10,
+    "max_tree_entry":40,
     "iwd_parameter":{
         "maximum_iteration":10000,
         "population_size":20,
@@ -37,7 +37,7 @@
     },
     "tolerance": {
         "rider_cost":24999,
-        "kitchen_optimality":20,
+        "kitchen_optimality":30,
         "user_satisfaction":0.005
     },
     "archive_size":10
