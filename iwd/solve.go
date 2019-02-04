@@ -65,7 +65,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 		bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
 		bestArchive.Update(config.ArchiveSize)
 
-		localArchive.Update(4)
+		localArchive.Update(2)
 		fmt.Println(len(localArchive.ElementList))
 		for arIdx := range localArchive.ElementList {
 			wd := localArchive.ElementList[arIdx].Wd

@@ -4,11 +4,11 @@
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":3,
+    "neighbour_count":10,
     "max_tree_entry":40,
     "iwd_parameter":{
         "maximum_iteration":10000,
-        "population_size":20,
+        "population_size":10,
         "as":1,
         "bs":0.01,
         "cs":1,
@@ -23,9 +23,9 @@
         "max_d_soil":9999999
     },
     "weight":{
-        "rider_cost" : 0.8,
-        "kitchen_optimality":0.15,
-        "user_satisfaction":0.05
+        "rider_cost" : 1,
+        "kitchen_optimality":0,
+        "user_satisfaction":0
     },
     "sa_parameter":{
         "temp":{
@@ -37,7 +37,7 @@
     },
     "tolerance": {
         "rider_cost":24999,
-        "kitchen_optimality":30,
+        "kitchen_optimality":20,
         "user_satisfaction":0.005
     },
     "archive_size":10
