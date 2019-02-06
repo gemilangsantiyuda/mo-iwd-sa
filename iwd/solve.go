@@ -66,8 +66,13 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			}
 		}
 
-		bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
-		bestArchive.Update(config.ArchiveSize)
+		// bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
+		// bestArchive.Update(config.ArchiveSize)
+
+		for arIdx := range localArchive.ElementList {
+			newElement := localArchive.ElementList[arIdx]
+			bestArchive.LimitingInsert(newElement)
+		}
 
 		localArchive.Update(2)
 		fmt.Println(len(localArchive.ElementList))
