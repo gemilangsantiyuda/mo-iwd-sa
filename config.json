@@ -28,11 +28,7 @@
         "user_satisfaction":0
     },
     "sa_parameter":{
-        "temp":{
-            "rider_cost":50000,
-            "kitchen_optimality":200,
-            "user_satisfaction":0.4
-        },
+        "temp":20,
         "cooling_rate": 0.99992
     },
     "tolerance": {

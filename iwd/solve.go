@@ -35,7 +35,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 		// calculate score for all finishedWaterDrops
 		for wdIdx := range finishedWaterDrops {
 			wd := finishedWaterDrops[wdIdx]
-			wd.updateKitchenPreference()
+			// wd.updateKitchenPreference()
 			if wd.hasValidRouteList() {
 				wd.calcScore()
 				// mutate water drop and replace based on SA
@@ -43,15 +43,19 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 				mutationWD := wd.getMutation(swapCount)
 				if mutationWD.hasValidRouteList() {
 					mutationWD.calcScore()
-					if mutationWD.Score.IsDominate(wd.Score, config.Tolerance) {
-						wd = mutationWD
-					} else {
-						prob := getSAProb(mutationWD.Score, wd.Score, config)
-						r := rand.Float64()
-						if r <= prob {
-							wd = mutationWD
-						}
+					archiveE := &ArchiveElement{
+						Wd: mutationWD,
 					}
+					localArchive.ElementList = append(localArchive.ElementList, archiveE)
+					// if mutationWD.Score.IsDominate(wd.Score, config.Tolerance) {
+					// 	wd = mutationWD
+					// } else {
+					// 	prob := getSAProb(mutationWD.Score, wd.Score, config)
+					// 	r := rand.Float64()
+					// 	if r <= prob {
+					// 		wd = mutationWD
+					// 	}
+					// }
 
 				}
 
@@ -62,14 +66,27 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			}
 		}
 
-		bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
-		bestArchive.Update(config.ArchiveSize)
+		// bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
+		// bestArchive.Update(config.ArchiveSize)
+
+		for arIdx := range localArchive.ElementList {
+			newElement := localArchive.ElementList[arIdx]
+			bestArchive.LimitingInsert(newElement)
+		}
 
 		localArchive.Update(2)
 		fmt.Println(len(localArchive.ElementList))
 		for arIdx := range localArchive.ElementList {
-			wd := localArchive.ElementList[arIdx].Wd
-			globalUpdate(soilMap, wd)
+			element := localArchive.ElementList[arIdx]
+			wd := element.Wd
+			fitness := element.Fitness
+			if fitness > 1 {
+				prob := getSAProb(config, fitness)
+				r := rand.Float64()
+				if r <= prob {
+					globalUpdate(soilMap, wd)
+				}
+			}
 		}
 
 		fmt.Println("Best Archive Iteration ", iter)

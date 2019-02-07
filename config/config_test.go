@@ -9,7 +9,7 @@ import (
 )
 
 var testCase = config.Config{
-	DeliveryDate:      "2018-08-16",
+	DataSize:          "2018-08-16",
 	MaxDriverCapacity: 40,
 	MaxDriverDistance: 90000,
 	MaxTreeEntry:      60,
@@ -23,7 +23,7 @@ var testCase = config.Config{
 		Bv:               0.01,
 		Cv:               1,
 		InitSoil:         1000,
-		InitVel:          100,
+		InitIWDVel:       100,
 	},
 	Weight: config.Weight{
 		RiderCost:         0.7,
@@ -34,7 +34,7 @@ var testCase = config.Config{
 
 func TestConfig(t *testing.T) {
 	// Arrange
-	var conf config.Config
+	var conf *config.Config
 
 	// Act
 	conf = config.ReadConfig()

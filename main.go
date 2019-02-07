@@ -15,6 +15,7 @@ import (
 )
 
 func main() {
+	start := time.Now()
 	config := config.ReadConfig()
 	orderList := order.GetOrderList(config)
 	kitchenList := kitchen.GetKitchenList(config)
@@ -58,4 +59,5 @@ func main() {
 		kitchen := kitchenList[idx]
 		fmt.Println(kitchen.ID, " cap ", kitchen.Capacity, " served qty ", ksqMap.GetServedQty(kitchen))
 	}
+	fmt.Println("relapsed Time :", time.Since(start))
 }
