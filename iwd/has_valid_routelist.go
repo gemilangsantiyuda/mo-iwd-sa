@@ -8,6 +8,7 @@ func (wd *WaterDrop) hasValidRouteList() bool {
 		// fmt.Println("FALSE")
 		return false
 	}
+
 	// a kitchen serving but served less then its minimum capacity
 	kitchenList := wd.KitchenList
 	ksqMap := wd.KitchenServedQtyMap

@@ -27,6 +27,7 @@ type WaterDrop struct {
 	KitchenList         []*kitchen.Kitchen
 	Tree                *mtree.Tree
 	Config              *config.Config
+	DistCalc            distanceCalculator
 }
 
 // calcScore after solving an iteration wd get the score of the routelist made

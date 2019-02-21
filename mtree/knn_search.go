@@ -2,23 +2,15 @@ package mtree
 
 import (
 	"container/heap"
-	"math"
 
-	"github.com/vroup/mo-iwd-sa/object"
 	"github.com/vroup/mo-iwd-sa/order"
 )
 
 // An Item is something we manage in a priority queue.
 type Item struct {
-	entry    Entry
+	entry    entry
 	distance float64
 	index    int // The index of the item in the heap. essential for heap
-}
-
-// Neighbour entry and its distance to query object
-type Neighbour struct {
-	Order    *order.Order
-	Distance float64
 }
 
 // A PriorityQueue implements heap.Interface and holds Items.
@@ -55,14 +47,19 @@ func (pq *PriorityQueue) Pop() interface{} {
 	return item
 }
 
+type neighbour struct {
+	Object   Object
+	Distance float64
+}
+
 // KnnSearch return k entry nearest to query object
-func (tree *Tree) KnnSearch(root *Node, queryObject object.Object, k int, CapacityLeft int, MaxDistance float64) []*Neighbour {
+func (tree *Tree) KnnSearch(queryObject Object, k int, maxDistance float64, maxQty int) []*neighbour {
 	var pq PriorityQueue
-	var neighbourList []*Neighbour
+	var neighbourList []*neighbour
 	heap.Init(&pq)
 
 	item := &Item{
-		entry: root,
+		entry: tree.root,
 	}
 	heap.Push(&pq, item)
 
@@ -70,31 +67,36 @@ func (tree *Tree) KnnSearch(root *Node, queryObject object.Object, k int, Capaci
 	for pq.Len() > 0 && len(neighbourList) < k {
 		item = heap.Pop(&pq).(*Item)
 		entry := item.entry
-		if _, ok := entry.(*LeafEntry); ok {
-			leafEntry := entry.(*LeafEntry)
-			order := leafEntry.Object.(*order.Order)
-			if order.Quantity > CapacityLeft {
+		distance := item.distance
+
+		if _, ok := entry.(*leafEntry); ok {
+			object := entry.getCentroidObject().(*order.Order)
+			if object.Quantity > maxQty {
 				continue
 			}
-			distance := item.distance
-			if distance > MaxDistance {
-				continue
-			}
-			neighbour := &Neighbour{
-				Order:    order,
+			newNeighbour := &neighbour{
+				Object:   object,
 				Distance: distance,
 			}
-			neighbourList = append(neighbourList, neighbour)
+			neighbourList = append(neighbourList, newNeighbour)
 			continue
 		}
 
-		node := entry.(*Node)
-		for idx := range node.EntryList {
-			nextEntry := node.EntryList[idx]
-			distMin := math.Max(tree.DistCalc.GetDistance(queryObject, nextEntry)-nextEntry.GetRadius(), 0.)
+		distCalc := tree.distCalc
+		node := entry.(node)
+		entryList := node.getEntryList()
+		for idx := range entryList {
+			nextEntry := entryList[idx]
+			distanceToNextEntry := distCalc.GetDistance(queryObject, nextEntry.getCentroidObject()) - nextEntry.getRadius()
+			if distanceToNextEntry < 0 {
+				distanceToNextEntry = 0
+			}
+			if distanceToNextEntry > maxDistance {
+				continue
+			}
 			item := &Item{
 				entry:    nextEntry,
-				distance: distMin,
+				distance: distanceToNextEntry,
 			}
 			heap.Push(&pq, item)
 		}

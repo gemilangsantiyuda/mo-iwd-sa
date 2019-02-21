@@ -4,7 +4,8 @@ import (
 	"math"
 
 	"github.com/vroup/mo-iwd-sa/coordinate"
-	"github.com/vroup/mo-iwd-sa/object"
+	"github.com/vroup/mo-iwd-sa/mtree"
+	iwdObj "github.com/vroup/mo-iwd-sa/object"
 )
 
 // HaversineDistance repo for haversine distance calculator
@@ -12,11 +13,12 @@ type HaversineDistance struct {
 }
 
 // GetDistance return the haversine distance of the 2 objects based on their latitude longitude location
-func (hd *HaversineDistance) GetDistance(objectOrigin, objectDestination object.Object) float64 {
-	coordOrigin := objectOrigin.GetCoordinate()
-	coordDestination := objectDestination.GetCoordinate()
-	haversineDistance := hd.calculateCoordHaversineDistance(coordOrigin, coordDestination)
-	return haversineDistance
+func (hd *HaversineDistance) GetDistance(objectOrigin, objectDestination mtree.Object) float64 {
+	rOrigin := objectOrigin.(iwdObj.Object)
+	rDest := objectDestination.(iwdObj.Object)
+	coordOrigin, coordDestination := rOrigin.GetCoordinate(), rDest.GetCoordinate()
+	distance := hd.calculateCoordHaversineDistance(coordOrigin, coordDestination)
+	return distance
 }
 
 func (hd *HaversineDistance) calculateCoordHaversineDistance(coordOrigin, coordDestination *coordinate.Coordinate) float64 {
@@ -28,25 +30,4 @@ func (hd *HaversineDistance) calculateCoordHaversineDistance(coordOrigin, coordD
 	a := math.Sin(DY/2)*math.Sin(DY/2) + math.Cos(Y1)*math.Cos(Y2)*math.Sin(DX/2)*math.Sin(DX/2)
 	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
 	return R * c * 5. / 4.
-}
-
-// GetDistanceMatrix returns distance matrix
-func (hd *HaversineDistance) GetDistanceMatrix(objectList object.List) [][]float64 {
-	coordList := objectList.GetCoordinateList()
-	distanceMatrix := make([][]float64, len(coordList))
-	for idx := range coordList {
-		distanceList := make([]float64, len(coordList))
-		distanceMatrix[idx] = distanceList
-	}
-
-	for idx1 := range coordList {
-		coord1 := coordList[idx1]
-		for idx2 := idx1 + 1; idx2 < len(coordList); idx2++ {
-			coord2 := coordList[idx2]
-			distance := hd.calculateCoordHaversineDistance(coord1, coord2)
-			distanceMatrix[idx1][idx2] = distance
-			distanceMatrix[idx2][idx1] = distance
-		}
-	}
-	return distanceMatrix
 }

@@ -18,6 +18,7 @@ func (wd *WaterDrop) getMutation(maxSwap int) *WaterDrop {
 		OrderList:           wd.OrderList,
 		KitchenList:         wd.KitchenList,
 		Config:              wd.Config,
+		DistCalc:            wd.DistCalc,
 		Tree:                wd.Tree,
 	}
 
@@ -71,7 +72,7 @@ func (wd *WaterDrop) swapRoutePath(route1, route2 *Route, orderIdx1, orderIdx2 i
 	orderList1, distanceList1, servedQtyList1, ratingList1 := route1.Split(ksqMap, orderIdx1)
 	orderList2, distanceList2, servedQtyList2, ratingList2 := route2.Split(ksqMap, orderIdx2)
 
-	distCalc := wd.Tree.DistCalc
+	distCalc := wd.DistCalc
 	rtMap := wd.RatingMap
 
 	// update list yang terpisah dengan nilai baru masing2 list yang dihasilkan jika mereka digabungkan ke rute lain

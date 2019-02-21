@@ -1,44 +1,31 @@
 package mtree
 
-import (
-	"github.com/vroup/mo-iwd-sa/coordinate"
-	"github.com/vroup/mo-iwd-sa/object"
-)
-
-// LeafEntry stores the spatial object
-type LeafEntry struct {
-	Object             object.Object
-	ObjectID           string
-	Parent             *Node
-	DistanceFromParent float64
+type leafEntry struct {
+	parent             node
+	distanceFromParent float64
+	object             Object
 }
 
-// GetCoordinate return the spatial object lat lon coordinate
-func (le *LeafEntry) GetCoordinate() *coordinate.Coordinate {
-	return le.Object.GetCoordinate()
+func (lfe *leafEntry) getRadius() float64 {
+	return 0
 }
 
-// GetParent return this entry parent
-func (le *LeafEntry) GetParent() *Node {
-	return le.Parent
+func (lfe *leafEntry) getCentroidObject() Object {
+	return lfe.object
 }
 
-// SetParent set this entry's parent, and update its distance from parent
-func (le *LeafEntry) SetParent(newParent *Node) {
-	le.Parent = newParent
+func (lfe *leafEntry) getDistanceFromParent() float64 {
+	return lfe.distanceFromParent
 }
 
-// GetRadius return 0 because spatial object has no radius
-func (le *LeafEntry) GetRadius() float64 {
-	return 0.
+func (lfe *leafEntry) setDistanceFromParent(distance float64) {
+	lfe.distanceFromParent = distance
 }
 
-// GetDistanceFromParent return this entry's distance from its parent
-func (le *LeafEntry) GetDistanceFromParent() float64 {
-	return le.DistanceFromParent
+func (lfe *leafEntry) getParent() node {
+	return lfe.parent
 }
 
-// SetDistanceFromParent set this leaf entry's distance to its parent node
-func (le *LeafEntry) SetDistanceFromParent(dist float64) {
-	le.DistanceFromParent = dist
+func (lfe *leafEntry) setParent(parent node) {
+	lfe.parent = parent
 }

@@ -1,100 +1,76 @@
 package mtree
 
-import (
-	"fmt"
-	"math"
+import "math"
 
-	"github.com/vroup/mo-iwd-sa/object"
-)
-
-// Insert make a new leaf entry of the new inserted object then insert it into the fittest leaf node
-func (tree *Tree) Insert(object object.Object, objectID string) {
-
-	newLeafEntry := &LeafEntry{
-		Object:             object,
-		ObjectID:           objectID,
-		Parent:             nil,
-		DistanceFromParent: 0,
+// Insert an object to the mtree
+func (tree *Tree) Insert(object Object) {
+	newLeafEntry := &leafEntry{
+		object: object,
+	}
+	// fmt.Println("new Leaf ", newLeafEntry)
+	newNode1, newNode2 := tree.insertNewLeafEntry(tree.root, newLeafEntry)
+	if newNode1 != nil {
+		newRoot := &branch{}
+		newRoot.insertEntry(newNode1)
+		newRoot.insertEntry(newNode2)
+		dist2 := tree.distCalc.GetDistance(newNode2.getCentroidObject(), newRoot.getCentroidObject())
+		newNode2.setDistanceFromParent(dist2)
+		radius := math.Max(newNode1.getRadius(), dist2+newNode2.getRadius())
+		newRoot.radius = radius
+		tree.root = newRoot
 	}
 
-	tree.insertLeafEntry(tree.Root, newLeafEntry)
-	distanceFromNewEntryToRoot := tree.DistCalc.GetDistance(tree.Root, newLeafEntry)
-	if distanceFromNewEntryToRoot > tree.Root.GetRadius() {
-		tree.Root.SetRadius(distanceFromNewEntryToRoot)
-	}
 	tree.ObjectCount++
-	fmt.Println(tree.ObjectCount)
+	// traverse(tree.root)
 }
 
-func (tree *Tree) insertLeafEntry(currentNode *Node, newLeafEntry *LeafEntry) {
-	// If leaf node is met, and it is not full then insert directly
-	// else split the leaf node
-	if currentNode.IsLeaf() {
-		if len(currentNode.EntryList) < tree.MaxEntry {
-			currentNode.InsertEntry(newLeafEntry)
-		} else {
-			// check if perhaps the split create a new root
-			newRoot := tree.SplitMechanism.Split(currentNode, newLeafEntry)
-			if newRoot != nil {
-				tree.Root = newRoot
+func (tree *Tree) insertNewLeafEntry(currentNode node, newLeafEntry *leafEntry) (node, node) {
+	if currentNode.isLeaf() {
+		currentLeaf := currentNode.(*leaf)
+		currentLeaf.insertEntry(newLeafEntry)
+
+		// if the leaf's entries does not exceed maxEntry, then just return the radius,, else we split and return the promoted entry (2 new nodes)
+		if len(currentLeaf.entryList) <= tree.maxEntry {
+			distToParent := tree.distCalc.GetDistance(newLeafEntry.object, currentLeaf.getCentroidObject())
+			newLeafEntry.setDistanceFromParent(distToParent)
+			if currentLeaf.radius < distToParent {
+				currentLeaf.radius = distToParent
 			}
+			return nil, nil
 		}
-		return
+		// split and make 2 new nodes
+		newNode1, newNode2 := tree.splitMecha.split(currentLeaf.entryList)
+		return newNode1, newNode2
 	}
 
-	// else if it's internal node then find the most suitable node's entry to traverse
-	// the first options are the nodes which already cover the newLeafEntry
-	nextNode := tree.findNearestCoveringNode(currentNode.EntryList, newLeafEntry)
-	if nextNode != nil {
-		tree.insertLeafEntry(nextNode, newLeafEntry)
-	} else {
-		// if none found then find the node that need less to expand
-		nextNode, distanceToNextNode := tree.findLeastRadiusExpansionNode(currentNode.EntryList, newLeafEntry)
+	currentBranch := currentNode.(*branch)
+	nextNode := chooseBestNextNode(currentBranch.entryList, newLeafEntry, tree.distCalc)
+	newNode1, newNode2 := tree.insertNewLeafEntry(nextNode, newLeafEntry)
 
-		if distanceToNextNode > nextNode.GetRadius() {
-			nextNode.SetRadius(distanceToNextNode)
+	if newNode1 != nil {
+		currentBranch.removeEntry(nextNode)
+		currentBranch.insertEntry(newNode1)
+		currentBranch.insertEntry(newNode2)
+		if len(currentBranch.entryList) <= tree.maxEntry {
+			dist1 := tree.distCalc.GetDistance(newNode1.getCentroidObject(), currentBranch.getCentroidObject())
+			newNode1.setDistanceFromParent(dist1)
+			dist2 := tree.distCalc.GetDistance(newNode2.getCentroidObject(), currentBranch.getCentroidObject())
+			newNode2.setDistanceFromParent(dist2)
+			if currentBranch.radius < dist1+newNode1.getRadius() {
+				currentBranch.radius = dist1 + newNode1.getRadius()
+			}
+			if currentBranch.radius < dist2+newNode2.getRadius() {
+				currentBranch.radius = dist2 + newNode2.getRadius()
+			}
+			return nil, nil
 		}
-		tree.insertLeafEntry(nextNode, newLeafEntry)
+		newNode1, newNode2 = tree.splitMecha.split(currentBranch.entryList)
+		return newNode1, newNode2
 	}
-}
-
-func (tree *Tree) findNearestCoveringNode(entryList []Entry, newLeafEntry *LeafEntry) *Node {
-
-	nearesetDistance := math.Inf(1)
-	nearestNodeIdx := -1
-	for idx := range entryList {
-		entry := entryList[idx]
-		distanceToEntry := tree.DistCalc.GetDistance(newLeafEntry, entry)
-		if distanceToEntry > entry.GetRadius() {
-			continue
-		}
-		if distanceToEntry < nearesetDistance {
-			nearesetDistance = distanceToEntry
-			nearestNodeIdx = idx
-		}
+	newRadius := nextNode.getDistanceFromParent() + nextNode.getRadius()
+	if newRadius > currentBranch.radius {
+		currentBranch.radius = newRadius
 	}
 
-	if nearestNodeIdx == -1 {
-		return nil
-	}
-	nearestNode := entryList[nearestNodeIdx].(*Node)
-	return nearestNode
-}
-
-func (tree *Tree) findLeastRadiusExpansionNode(entryList []Entry, newLeafEntry *LeafEntry) (*Node, float64) {
-	leastRadiusExpansion := math.Inf(1)
-	distanceToNextNode := math.Inf(1)
-	nextNode := &Node{}
-
-	for idx := range entryList {
-		nextNodeCandidate := entryList[idx].(*Node)
-		distanceToNextNodeCandidate := tree.DistCalc.GetDistance(nextNodeCandidate, newLeafEntry)
-		radiusExpansion := distanceToNextNodeCandidate - nextNodeCandidate.GetRadius()
-		if radiusExpansion < leastRadiusExpansion {
-			leastRadiusExpansion = radiusExpansion
-			distanceToNextNode = distanceToNextNodeCandidate
-			nextNode = nextNodeCandidate
-		}
-	}
-	return nextNode, distanceToNextNode
+	return nil, nil
 }

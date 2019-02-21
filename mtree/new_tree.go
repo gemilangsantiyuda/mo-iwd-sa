@@ -1,36 +1,16 @@
 package mtree
 
-import "github.com/vroup/mo-iwd-sa/distance"
-
-// NewTree initiate new tree
-func NewTree(maxEntry int, splitMechanism SplitMechanism, distCalc DistanceCalculator) *Tree {
-
-	if distCalc == nil {
-		distCalc = &distance.ManhattanDistance{}
+// NewTree initiates mtree
+func NewTree(minEntry, maxEntry int, distCalc distanceCalculator) *Tree {
+	splitMecha := &splitMST{
+		distCalc: distCalc,
 	}
-
-	if splitMechanism == nil {
-		splitMechanism = &SplitMST{
-			MaxEntry: maxEntry,
-			DistCalc: distCalc,
-		}
+	root := &leaf{}
+	return &Tree{
+		root:       root,
+		minEntry:   minEntry,
+		maxEntry:   maxEntry,
+		distCalc:   distCalc,
+		splitMecha: splitMecha,
 	}
-
-	newEntryList := make([]Entry, 0)
-	root := &Node{
-		Parent:             nil,
-		Radius:             0.,
-		DistanceFromParent: 0.,
-		CentroidEntry:      nil,
-		EntryList:          newEntryList,
-	}
-
-	newTree := &Tree{
-		Root:           root,
-		MaxEntry:       maxEntry,
-		SplitMechanism: splitMechanism,
-		DistCalc:       distCalc,
-	}
-
-	return newTree
 }

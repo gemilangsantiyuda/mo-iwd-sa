@@ -6,11 +6,11 @@ import (
 
 	"github.com/vroup/mo-iwd-sa/coordinate"
 	"github.com/vroup/mo-iwd-sa/distance"
-	"github.com/vroup/mo-iwd-sa/object"
+	"github.com/vroup/mo-iwd-sa/mtree"
 )
 
 type DistCalculator interface {
-	GetDistance(object.Object, object.Object) float64
+	GetDistance(mtree.Object, mtree.Object) float64
 }
 
 type TestCase struct {

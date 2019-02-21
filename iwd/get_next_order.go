@@ -23,7 +23,7 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	userRating := 0.
 
 	neighbourCount := conf.NeighbourCount
-	neighbourList := tree.KnnSearch(tree.Root, currentNode, neighbourCount, maxCap, maxDistance)
+	neighbourList := tree.KnnSearch(currentNode, neighbourCount, maxDistance, maxCap)
 	if len(neighbourList) == 0 {
 		// no neighbour found feasible
 		return nil, 0, 0
@@ -31,7 +31,7 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	// fmt.Printf("CurrentRoute---->%+v\n", currentRoute)
 	for idx := range neighbourList {
 		neighbour := neighbourList[idx]
-		order := neighbour.Order
+		order := neighbour.Object.(*order.Order)
 		distance = neighbour.Distance
 		newQty := servedQty + order.Quantity
 		if newQty <= servingKitchen.Capacity.Optimum {
@@ -51,7 +51,7 @@ func (wd *WaterDrop) getNextOrder(currentRoute *Route, currentNode node) (*order
 	probList := wd.getProbList(soilList)
 	chosenIdx := chooseIdxByRouletteWheel(probList)
 	// fmt.Println("Chosen Idx", chosenIdx)
-	nextOrder, distance, moDistance := neighbourList[chosenIdx].Order, neighbourList[chosenIdx].Distance, moDistanceList[chosenIdx]
+	nextOrder, distance, moDistance := neighbourList[chosenIdx].Object.(*order.Order), neighbourList[chosenIdx].Distance, moDistanceList[chosenIdx]
 
 	return nextOrder, distance, moDistance
 }

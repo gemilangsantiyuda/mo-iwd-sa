@@ -8,10 +8,10 @@ import (
 	"github.com/vroup/mo-iwd-sa/rating"
 )
 
-func initWaterDrops(soilMap SoilMap, ratingMap rating.Map, orderList []*order.Order, kitchenList []*kitchen.Kitchen, tree *mtree.Tree, config *config.Config) []*WaterDrop {
+func initWaterDrops(soilMap SoilMap, ratingMap rating.Map, orderList []*order.Order, kitchenList []*kitchen.Kitchen, tree *mtree.Tree, distCalc distanceCalculator, config *config.Config) []*WaterDrop {
 	var waterDropList []*WaterDrop
 	for idx := 0; idx < config.IwdParameter.PopulationSize; idx++ {
-		wd := newWaterDrop(soilMap, ratingMap, orderList, kitchenList, tree, config)
+		wd := newWaterDrop(soilMap, ratingMap, orderList, kitchenList, tree, distCalc, config)
 		waterDropList = append(waterDropList, wd)
 	}
 	return waterDropList

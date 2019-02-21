@@ -1,128 +1,35 @@
 package mtree
 
 import (
-	"math"
 	"sort"
 )
 
-// SplitMST based on the slim-tree MST Split mechanism
-type SplitMST struct {
-	MaxEntry int
-	DistCalc DistanceCalculator
+// splitMST split MST implement splitting with MST from slim tree
+type splitMST struct {
+	distCalc distanceCalculator
 }
 
-// Edge and Adjacency FOR MST making
-type Edge struct {
+func (sm *splitMST) split(entryList []entry) (node, node) {
+	var newNode1, newNode2 node
+	entryList1, entryList2 := sm.partitionEntryList(entryList)
+
+	newNode1 = createNodeWithEntries(entryList1, sm.distCalc)
+	newNode2 = createNodeWithEntries(entryList2, sm.distCalc)
+
+	return newNode1, newNode2
+}
+
+type edge struct {
 	EntryIdx1, EntryIdx2 int
 	Length               float64
 }
 
-// Adjacency is adjacency, God linting so bothersome sometimes
-type Adjacency []int
+type adjacency []int
 
-// Split the full node into 2 new nodes with MST mechanism based on slim-tree
-func (sm *SplitMST) Split(nodeToSplit *Node, newEntry Entry) *Node {
-	entryList := append(nodeToSplit.EntryList, newEntry)
-	newEntryList1, newEntryList2 := sm.partitionEntryList(entryList)
-
-	// creating new nodes from the partitioned previous entrylist
-	newNode1 := sm.createNewNodeWithExistingEntries(newEntryList1)
-	newNode2 := sm.createNewNodeWithExistingEntries(newEntryList2)
-
-	// check if nodeToSplit is not the root ,if it isn't then replace the nodeToSplit with newNode1 and insert newNode2. if parentNode has full entries, then split the parentNode
-	if nodeToSplit.Parent != nil {
-		parentNode := nodeToSplit.Parent
-		sm.replaceNodeEntry(parentNode, nodeToSplit, newNode1)
-		if len(parentNode.EntryList) == sm.MaxEntry {
-			newRoot := sm.Split(parentNode, newNode2)
-			return newRoot
-		}
-		// else
-		parentNode.InsertEntry(newNode2)
-		// Update parent radius and each entries distance to parent
-		sm.updateNodeRadius(parentNode)
-		return nil
-	}
-
-	// create new root
-	var rootEntryList = []Entry{newNode1, newNode2}
-	newRoot := sm.createNewNodeWithExistingEntries(rootEntryList)
-
-	return newRoot
-}
-
-// ReplaceEntry to replace an entry of node. In case the replaced entry was the node's centroid, then the node entries need to update their distanceFromParent
-func (sm *SplitMST) replaceNodeEntry(node *Node, entryToReplace, replacementEntry Entry) {
-	for idx := range node.EntryList {
-		if node.EntryList[idx] == entryToReplace {
-			node.EntryList[idx] = replacementEntry
-			break
-		}
-	}
-
-	if node.CentroidEntry == entryToReplace {
-		node.CentroidEntry = replacementEntry
-		for idx := range node.EntryList {
-			distance := sm.DistCalc.GetDistance(node, node.EntryList[idx])
-			node.EntryList[idx].SetDistanceFromParent(distance)
-		}
-	} else {
-		distance := sm.DistCalc.GetDistance(node, replacementEntry)
-		replacementEntry.SetDistanceFromParent(distance)
-	}
-	replacementEntry.SetParent(node)
-}
-
-func (sm *SplitMST) updateNodeRadius(node *Node) {
-	newRadius := 0.
-	for idx := range node.EntryList {
-		entry := node.EntryList[idx]
-		distanceNodeToEntry := sm.DistCalc.GetDistance(node, entry)
-		entry.SetDistanceFromParent(distanceNodeToEntry)
-		tempRadius := distanceNodeToEntry + entry.GetRadius()
-		newRadius = math.Max(tempRadius, newRadius)
-	}
-	node.Radius = newRadius
-}
-
-func (sm *SplitMST) createNewNodeWithExistingEntries(entryList []Entry) *Node {
-	el := EntryList(entryList)
-	distanceMatrix := sm.DistCalc.GetDistanceMatrix(el)
-	bestRadius := math.Inf(1)
-	var centroidEntryIdx int
-	for idx1 := range entryList {
-		maxRadius := math.Inf(-1)
-		for idx2 := range entryList {
-			entry2 := entryList[idx2]
-			radius := distanceMatrix[idx1][idx2] + entry2.GetRadius()
-			maxRadius = math.Max(maxRadius, radius)
-		}
-		if maxRadius < bestRadius {
-			bestRadius = maxRadius
-			centroidEntryIdx = idx1
-		}
-	}
-
-	// centroid entry is decided, then make new node with the centroid entry and set all entries to this node accordingly
-	centroidEntry := entryList[centroidEntryIdx]
-	node := &Node{
-		CentroidEntry: centroidEntry,
-		Radius:        bestRadius,
-		EntryList:     entryList,
-	}
-	for idx := range entryList {
-		entryList[idx].SetParent(node)
-		distance := distanceMatrix[centroidEntryIdx][idx]
-		entryList[idx].SetDistanceFromParent(distance)
-	}
-
-	return node
-}
-
-func (sm *SplitMST) partitionEntryList(entryList []Entry) ([]Entry, []Entry) {
+func (sm *splitMST) partitionEntryList(entryList []entry) ([]entry, []entry) {
 	edgeList := sm.getMSTEdgeList(entryList)
 	// Start partitioning, make 2 subgraph out of the edgelist minus the longest edge
-	var newEntryList1, newEntryList2 []Entry
+	var newEntryList1, newEntryList2 []entry
 	parentList := make([]int, len(entryList))
 	for idx := range parentList {
 		parentList[idx] = idx
@@ -151,11 +58,17 @@ func (sm *SplitMST) partitionEntryList(entryList []Entry) ([]Entry, []Entry) {
 	return newEntryList1, newEntryList2
 }
 
-func (sm *SplitMST) getMSTEdgeList(entryList []Entry) []*Edge {
-	el := EntryList(entryList)
-	distanceMatrix := sm.DistCalc.GetDistanceMatrix(el)
+func (sm *splitMST) getMSTEdgeList(entryList []entry) []*edge {
+
+	objList := make([]Object, 0)
+	for idx := range entryList {
+		obj := entryList[idx].getCentroidObject()
+		objList = append(objList, obj)
+	}
+	distanceMatrix := getDistanceMatrix(objList, sm.distCalc)
+
 	edgeList := sm.getSortedEdgeList(distanceMatrix)
-	var mstEdgeList []*Edge
+	var mstEdgeList []*edge
 	// MST Start
 	parentList := make([]int, len(entryList))
 	for idx := range parentList {
@@ -175,12 +88,12 @@ func (sm *SplitMST) getMSTEdgeList(entryList []Entry) []*Edge {
 	return mstEdgeList
 }
 
-func (sm *SplitMST) getSortedEdgeList(distanceMatrix [][]float64) []*Edge {
-	var sortedEdgeList []*Edge
+func (sm *splitMST) getSortedEdgeList(distanceMatrix [][]float64) []*edge {
+	var sortedEdgeList []*edge
 	for idx1 := range distanceMatrix {
 		for idx2 := range distanceMatrix[idx1] {
 			if idx1 != idx2 {
-				edge := &Edge{
+				edge := &edge{
 					EntryIdx1: idx1,
 					EntryIdx2: idx2,
 					Length:    distanceMatrix[idx1][idx2],
@@ -195,7 +108,7 @@ func (sm *SplitMST) getSortedEdgeList(distanceMatrix [][]float64) []*Edge {
 	return sortedEdgeList
 }
 
-func (sm *SplitMST) getParent(idx int, parentList []int) int {
+func (sm *splitMST) getParent(idx int, parentList []int) int {
 	parentIdx := parentList[idx]
 	for parentIdx != parentList[parentIdx] {
 		parentIdx = parentList[parentIdx]

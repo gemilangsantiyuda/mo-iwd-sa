@@ -15,7 +15,7 @@ func (wd *WaterDrop) getPossibleKitchenList() []*kitchen.Kitchen {
 		if maxCap > remainingKitchenCap {
 			maxCap = remainingKitchenCap
 		}
-		neighbourList := tree.KnnSearch(tree.Root, kitchen, 1, maxCap, maxDistance)
+		neighbourList := tree.KnnSearch(kitchen, 1, maxDistance, maxCap)
 		// if there's neighbour found then this kitchen has possibility
 		if len(neighbourList) > 0 {
 			possibleKitchenList = append(possibleKitchenList, kitchen)

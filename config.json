@@ -4,8 +4,9 @@
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":10,
-    "max_tree_entry":40,
+    "neighbour_count":1,
+    "max_tree_entry":30,
+    "min_tree_entry":17,
     "iwd_parameter":{
         "maximum_iteration":10000,
         "population_size":10,
@@ -36,5 +37,6 @@
         "kitchen_optimality":20,
         "user_satisfaction":0.005
     },
-    "archive_size":10
+    "best_archive_size":10,
+    "local_archive_size":4
 }

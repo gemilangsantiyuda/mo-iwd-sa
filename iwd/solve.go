@@ -12,7 +12,7 @@ import (
 )
 
 // Solve the mdovrp returning the best waterdrop
-func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, config *config.Config) *WaterDrop {
+func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, distCalc distanceCalculator, config *config.Config) *WaterDrop {
 
 	bestArchive := &Archive{
 		ElementList: make([]*ArchiveElement, 0),
@@ -21,7 +21,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 	soilMap := NewSoilMap(kitchenList, orderList, config)
 	for iter := 0; iter < config.IwdParameter.MaximumIteration; iter++ {
 		finishedWaterDrops := make([]*WaterDrop, 0)
-		workingWaterDrops := initWaterDrops(soilMap, ratingMap, orderList, kitchenList, tree, config)
+		workingWaterDrops := initWaterDrops(soilMap, ratingMap, orderList, kitchenList, tree, distCalc, config)
 
 		localArchive := &Archive{
 			ElementList: make([]*ArchiveElement, 0),
@@ -74,7 +74,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			bestArchive.LimitingInsert(newElement)
 		}
 
-		localArchive.Update(2)
+		localArchive.Update(config.LocalArchiveSize)
 		fmt.Println(len(localArchive.ElementList))
 		for arIdx := range localArchive.ElementList {
 			element := localArchive.ElementList[arIdx]

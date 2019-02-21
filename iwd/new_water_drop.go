@@ -8,7 +8,7 @@ import (
 	"github.com/vroup/mo-iwd-sa/rating"
 )
 
-func newWaterDrop(soilMap SoilMap, ratingMap rating.Map, orderList []*order.Order, kitchenList []*kitchen.Kitchen, tree *mtree.Tree, config *config.Config) *WaterDrop {
+func newWaterDrop(soilMap SoilMap, ratingMap rating.Map, orderList []*order.Order, kitchenList []*kitchen.Kitchen, tree *mtree.Tree, distCalc distanceCalculator, config *config.Config) *WaterDrop {
 	ksqMap := NewKitchenServedQtyMap(kitchenList)
 	orderTree := tree.GetCopy()
 	iwdParam := config.IwdParameter
@@ -21,6 +21,7 @@ func newWaterDrop(soilMap SoilMap, ratingMap rating.Map, orderList []*order.Orde
 		OrderList:           orderList,
 		KitchenList:         kitchenList,
 		Tree:                orderTree,
+		DistCalc:            distCalc,
 		Config:              config,
 	}
 	return waterDrop

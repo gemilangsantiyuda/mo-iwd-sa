@@ -2,7 +2,7 @@ package object
 
 import "github.com/vroup/mo-iwd-sa/coordinate"
 
-// Object is temporary interface, as the object entry of m-tree
+// Object is temporary interface, as the object entry of m-tree and b-tree
 type Object interface {
 	GetCoordinate() *coordinate.Coordinate
 }

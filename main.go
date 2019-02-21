@@ -21,17 +21,16 @@ func main() {
 	kitchenList := kitchen.GetKitchenList(config)
 	ratingMap := rating.GetRatingMap(config)
 	distCalc := &distance.HaversineDistance{}
-	tree := mtree.NewTree(config.MaxTreeEntry, nil, distCalc)
+	tree := mtree.NewTree(config.MinTreeEntry, config.MaxTreeEntry, distCalc)
 
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	for idx := range orderList {
 		order := orderList[idx]
-		id := order.ID
-		tree.Insert(order, id)
+		tree.Insert(order)
 	}
 
-	bestWD := iwd.Solve(orderList, kitchenList, ratingMap, tree, config)
+	bestWD := iwd.Solve(orderList, kitchenList, ratingMap, tree, distCalc, config)
 	if bestWD == nil {
 		return
 	}

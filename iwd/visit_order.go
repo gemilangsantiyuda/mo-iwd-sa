@@ -9,7 +9,7 @@ func (wd *WaterDrop) visitOrder(currentRoute *Route, currentNode node, nextOrder
 	servingKitchen := currentRoute.ServingKitchen
 
 	currentRoute.VisitedOrderList = append(currentRoute.VisitedOrderList, nextOrder)
-	tree.Remove(tree.Root, nextOrder, nextOrder.ID)
+	tree.Remove(nextOrder)
 	distance += currentRoute.GetDistanceTraveled()
 	currentRoute.DistanceList = append(currentRoute.DistanceList, distance)
 	rating := rtMap.GetOrderToKitchenRating(nextOrder, servingKitchen)
