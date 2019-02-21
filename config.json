@@ -4,7 +4,7 @@
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":1,
+    "neighbour_count":10,
     "max_tree_entry":30,
     "min_tree_entry":17,
     "iwd_parameter":{
@@ -30,7 +30,7 @@
     },
     "sa_parameter":{
         "temp":20,
-        "cooling_rate": 0.99992
+        "cooling_rate": 0.999
     },
     "tolerance": {
         "rider_cost":24999,
@@ -38,5 +38,5 @@
         "user_satisfaction":0.005
     },
     "best_archive_size":10,
-    "local_archive_size":4
+    "local_archive_size":2
 }

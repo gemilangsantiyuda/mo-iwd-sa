@@ -75,7 +75,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 		}
 
 		localArchive.Update(config.LocalArchiveSize)
-		fmt.Println(len(localArchive.ElementList))
+		// fmt.Println(len(localArchive.ElementList))
 		for arIdx := range localArchive.ElementList {
 			element := localArchive.ElementList[arIdx]
 			wd := element.Wd
