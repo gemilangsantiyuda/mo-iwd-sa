@@ -16,6 +16,7 @@ func (tree *Tree) Remove(object Object) {
 		newRoot := treeEntryList[0].(node)
 		newRoot.setParent(nil)
 		tree.root = newRoot
+		treeEntryList = tree.root.getEntryList()
 	}
 }
 
