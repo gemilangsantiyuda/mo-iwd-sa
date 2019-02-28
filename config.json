@@ -1,10 +1,10 @@
 {
-    "data_size":"medium",
+    "data_size":"large",
     "max_driver_capacity":40,
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":5,
+    "neighbour_count":1,
     "max_tree_entry":32,
     "min_tree_entry":15,
     "iwd_parameter":{
@@ -22,7 +22,7 @@
         "p" : 0.9,
         "min_d_soil":-99999999,
         "max_d_soil":9999999,
-        "max_ls_repetition":25
+        "max_ls_repetition":50
     },
     "weight":{
         "rider_cost" : 1,

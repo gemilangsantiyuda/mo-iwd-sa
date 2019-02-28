@@ -36,7 +36,8 @@ func (score *Score) IsWorseThan(newScore *Score) bool {
 
 // IsDominate return wether the score dominate the newscore
 func (score *Score) IsDominate(newScore *Score, tolerance config.Tolerance) bool {
-	return (score.RiderCost <= tolerance.RiderCost+newScore.RiderCost) && (score.KitchenOptimality <= tolerance.KitchenOptimality+newScore.KitchenOptimality) && (score.UserSatisfaction <= tolerance.UserSatisfaction+newScore.UserSatisfaction)
+	// return (score.RiderCost <= tolerance.RiderCost+newScore.RiderCost) && (score.KitchenOptimality <= tolerance.KitchenOptimality+newScore.KitchenOptimality) && (score.UserSatisfaction <= tolerance.UserSatisfaction+newScore.UserSatisfaction)
+	return ((score.RiderCost <= newScore.RiderCost) && (score.KitchenOptimality <= newScore.KitchenOptimality) && (score.UserSatisfaction <= newScore.UserSatisfaction)) && ((score.RiderCost < newScore.RiderCost) || (score.KitchenOptimality < newScore.KitchenOptimality) || (score.UserSatisfaction < newScore.UserSatisfaction))
 }
 
 // GetDifference return the difference between the 2 scores
