@@ -6,6 +6,7 @@ import (
 	"github.com/vroup/mo-iwd-sa/config"
 	"github.com/vroup/mo-iwd-sa/kitchen"
 	"github.com/vroup/mo-iwd-sa/order"
+	"github.com/vroup/mo-iwd-sa/rating"
 )
 
 // Route to hold info about a route
@@ -73,10 +74,17 @@ func (route *Route) Split(ksqMap KitchenServedQtyMap, orderIdx int) ([]*order.Or
 	newServedQtyList := route.ServedQtyList[orderIdx:]
 	route.ServedQtyList = route.ServedQtyList[:orderIdx]
 
-	// because the lists are the sum of item 0 until idx .. F[idx] = sum(G[0]...G[idx]) then we have to remove the value of F[orderIdx] from the new list to remove the value from the other cut of the list
-	removedDistance := newDistanceList[0]
-	removedRating := newRatingList[0]
-	removedQty := newServedQtyList[0]
+	// because the lists are the sum of item 0 until idx .. F[idx] = sum(G[0]...G[idx]) then we have to remove the value of F[orderIdx-1] from the new list to remove the value from the other cut of the list
+
+	removedDistance := 0.
+	removedRating := 0.
+	removedQty := 0
+	if orderIdx > 0 {
+		removedDistance = route.DistanceList[orderIdx-1]
+		removedRating = route.RatingList[orderIdx-1]
+		removedQty = route.ServedQtyList[orderIdx-1]
+	}
+
 	for idx := range newVisOrderList {
 		newDistanceList[idx] -= removedDistance
 		newRatingList[idx] -= removedRating
@@ -92,29 +100,83 @@ func (route *Route) Split(ksqMap KitchenServedQtyMap, orderIdx int) ([]*order.Or
 }
 
 // AddPath join a path into route
-func (route *Route) AddPath(ksqMap KitchenServedQtyMap, orderList []*order.Order, distanceList, ratingList []float64, servedQtyList []int, newDistance, newRating float64, newServedQty int) {
+func (route *Route) AddPath(ksqMap KitchenServedQtyMap, ratingMap rating.Map, orderList []*order.Order, distanceList, ratingList []float64, servedQtyList []int, newDistance float64) {
 	// update kitchen served qty
-	ksqMap.AddQty(route.ServingKitchen, newServedQty)
+	ksqMap.AddQty(route.ServingKitchen, servedQtyList[len(servedQtyList)-1])
 
-	// new value is added by  the old route last index value which is the sum from 0 -> last idx
-
-	if len(route.VisitedOrderList) > 0 {
-		newDistance += route.DistanceList[len(route.DistanceList)-1]
-		newRating += route.RatingList[len(route.RatingList)-1]
-		newServedQty += route.ServedQtyList[len(route.ServedQtyList)-1]
-	}
-
-	// update the list with their new added values
-	for idx := range orderList {
-		distanceList[idx] += newDistance
-		ratingList[idx] += newRating
-		servedQtyList[idx] += newServedQty
-	}
+	oldLen := len(route.VisitedOrderList)
 
 	// gabung
 	route.VisitedOrderList = append(route.VisitedOrderList, orderList...)
 	route.DistanceList = append(route.DistanceList, distanceList...)
 	route.RatingList = append(route.RatingList, ratingList...)
 	route.ServedQtyList = append(route.ServedQtyList, servedQtyList...)
+
+	newLen := len(route.VisitedOrderList)
+
+	// new value is added by  the old route last index value which is the sum from 0 -> last idx
+
+	// adjust distance list
+	oldDist := route.DistanceList[oldLen]
+	for idx := oldLen; idx < newLen; idx++ {
+		route.DistanceList[idx] -= oldDist
+		route.DistanceList[idx] += newDistance
+		if oldLen > 0 {
+			route.DistanceList[idx] += route.DistanceList[oldLen-1]
+		}
+	}
+
+	// adjust servedqty
+	if oldLen > 0 {
+		for idx := oldLen; idx < newLen; idx++ {
+			route.ServedQtyList[idx] += route.ServedQtyList[oldLen-1]
+		}
+	}
+
+	// adjust rating
+	for idx := oldLen; idx < newLen; idx++ {
+		order := route.VisitedOrderList[idx]
+		rate := ratingMap.GetOrderToKitchenRating(order, route.ServingKitchen)
+		route.RatingList[idx] = rate
+		if idx > 0 {
+			route.RatingList[idx] += route.RatingList[idx-1]
+		}
+	}
+
+}
+
+func (route *Route) reverseOrders(startIdx, endIdx int, distCalc distanceCalculator, ksqMap KitchenServedQtyMap, ratingMap rating.Map, config *config.Config) {
+
+	if startIdx == endIdx {
+		return
+	}
+
+	// reverse the visit list
+	for idx := 0; startIdx+idx <= (startIdx+endIdx)/2; idx++ {
+		temp := route.VisitedOrderList[startIdx+idx]
+		route.VisitedOrderList[startIdx+idx] = route.VisitedOrderList[endIdx-idx]
+		route.VisitedOrderList[endIdx-idx] = temp
+	}
+
+	servingKitchen := route.ServingKitchen
+	for idx := startIdx; idx < len(route.VisitedOrderList); idx++ {
+		order := route.VisitedOrderList[idx]
+		dist := 0.
+		qty := order.Quantity
+		rate := ratingMap.GetOrderToKitchenRating(order, servingKitchen)
+		if idx > 0 {
+			lastOrder := route.VisitedOrderList[idx-1]
+			dist = distCalc.GetDistance(lastOrder, order)
+
+			dist += route.DistanceList[idx-1]
+			qty += route.ServedQtyList[idx-1]
+			rate += route.RatingList[idx-1]
+		} else {
+			dist = distCalc.GetDistance(servingKitchen, order)
+		}
+		route.DistanceList[idx] = dist
+		route.ServedQtyList[idx] = qty
+		route.RatingList[idx] = rate
+	}
 
 }

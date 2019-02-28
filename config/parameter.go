@@ -16,4 +16,5 @@ type IwdParameter struct {
 	P                float64 `json:"p"`
 	MinDSoil         float64 `json:"min_d_soil"`
 	MaxDSoil         float64 `json:"max_d_soil"`
+	MaxLSRepetition  float64 `json:"max_ls_repetition"`
 }

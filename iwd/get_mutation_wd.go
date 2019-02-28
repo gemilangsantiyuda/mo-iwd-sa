@@ -94,16 +94,11 @@ func (wd *WaterDrop) swapRoutePath(route1, route2 *Route, orderIdx1, orderIdx2 i
 	nextNode2 := orderList1[0]
 
 	newDistance1 := distCalc.GetDistance(currentNode1, nextNode1)
-	newRating1 := rtMap.GetOrderToKitchenRating(nextNode1, kitchen1)
-	newServedQty1 := nextNode1.Quantity
-
 	newDistance2 := distCalc.GetDistance(currentNode2, nextNode2)
-	newRating2 := rtMap.GetOrderToKitchenRating(nextNode2, kitchen2)
-	newServedQty2 := nextNode2.Quantity
 
 	// gabungkan
-	route1.AddPath(ksqMap, orderList2, distanceList2, ratingList2, servedQtyList2, newDistance1, newRating1, newServedQty1)
-	route2.AddPath(ksqMap, orderList1, distanceList1, ratingList1, servedQtyList1, newDistance2, newRating2, newServedQty2)
+	route1.AddPath(ksqMap, rtMap, orderList2, distanceList2, ratingList2, servedQtyList2, newDistance1)
+	route2.AddPath(ksqMap, rtMap, orderList1, distanceList1, ratingList1, servedQtyList1, newDistance2)
 
 	// recalculate rider cost
 	route1.CalcRiderCost(wd.Config)

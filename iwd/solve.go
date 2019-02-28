@@ -12,7 +12,7 @@ import (
 )
 
 // Solve the mdovrp returning the best waterdrop
-func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, distCalc distanceCalculator, config *config.Config) *WaterDrop {
+func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, distCalc distanceCalculator, config *config.Config) []*WaterDrop {
 
 	bestArchive := &Archive{
 		ElementList: make([]*ArchiveElement, 0),
@@ -47,16 +47,6 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 						Wd: mutationWD,
 					}
 					localArchive.ElementList = append(localArchive.ElementList, archiveE)
-					// if mutationWD.Score.IsDominate(wd.Score, config.Tolerance) {
-					// 	wd = mutationWD
-					// } else {
-					// 	prob := getSAProb(mutationWD.Score, wd.Score, config)
-					// 	r := rand.Float64()
-					// 	if r <= prob {
-					// 		wd = mutationWD
-					// 	}
-					// }
-
 				}
 
 				archiveE := &ArchiveElement{
@@ -69,7 +59,10 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 		// bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
 		// bestArchive.Update(config.ArchiveSize)
 
+		// optimize with local search all in the local archive
+
 		for arIdx := range localArchive.ElementList {
+			// optimizeInverse(localArchive.ElementList[arIdx].Wd, distCalc, config)
 			newElement := localArchive.ElementList[arIdx]
 			bestArchive.LimitingInsert(newElement)
 		}
@@ -93,9 +86,21 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 		for arIdx := range bestArchive.ElementList {
 			element := bestArchive.ElementList[arIdx]
 			fmt.Printf("%+v fit: %f\n", element.Wd.Score, element.Fitness)
+			ksqMap := element.Wd.KitchenServedQtyMap
+			totalServedQty := 0
+			for kdx := range kitchenList {
+				svKitchen := kitchenList[kdx]
+				totalServedQty += ksqMap.GetServedQty(svKitchen)
+
+			}
+			fmt.Println("total Served : ", totalServedQty)
 		}
 		updateTemperature(config)
 	}
 
-	return bestArchive.ElementList[0].Wd
+	solutionList := make([]*WaterDrop, 0)
+	for idx := range bestArchive.ElementList {
+		solutionList = append(solutionList, bestArchive.ElementList[idx].Wd)
+	}
+	return solutionList
 }

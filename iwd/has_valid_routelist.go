@@ -16,7 +16,7 @@ func (wd *WaterDrop) hasValidRouteList() bool {
 		kitchen := kitchenList[idx]
 		servedQty := ksqMap.GetServedQty(kitchen)
 		if servedQty > 0 {
-			if servedQty < kitchen.Capacity.Minimum {
+			if servedQty < kitchen.Capacity.Minimum || servedQty > kitchen.Capacity.Maximum {
 				return false
 			}
 		}

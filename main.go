@@ -23,17 +23,21 @@ func main() {
 	distCalc := &distance.HaversineDistance{}
 	tree := mtree.NewTree(config.MinTreeEntry, config.MaxTreeEntry, distCalc)
 
-	rand.Seed(time.Now().UTC().UnixNano())
+	currentSeed := int64(1551319497440281112)
+	// currentSeed := time.Now().UTC().UnixNano()
+	fmt.Println(currentSeed)
+	rand.Seed(currentSeed)
 
 	for idx := range orderList {
 		order := orderList[idx]
 		tree.Insert(order)
 	}
 
-	bestWD := iwd.Solve(orderList, kitchenList, ratingMap, tree, distCalc, config)
-	if bestWD == nil {
+	bestWDs := iwd.Solve(orderList, kitchenList, ratingMap, tree, distCalc, config)
+	if bestWDs == nil {
 		return
 	}
+	bestWD := bestWDs[0]
 	fmt.Println(bestWD.Soil)
 	fmt.Println("---------------")
 	for idx := range bestWD.RouteList {
@@ -59,4 +63,5 @@ func main() {
 		fmt.Println(kitchen.ID, " cap ", kitchen.Capacity, " served qty ", ksqMap.GetServedQty(kitchen))
 	}
 	fmt.Println("relapsed Time :", time.Since(start))
+
 }
