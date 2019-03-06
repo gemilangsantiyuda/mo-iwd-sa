@@ -1,10 +1,10 @@
 {
-    "data_size":"large",
+    "data_size":"medium",
     "max_driver_capacity":40,
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":1,
+    "neighbour_count":15,
     "max_tree_entry":32,
     "min_tree_entry":15,
     "iwd_parameter":{
@@ -35,9 +35,9 @@
     },
     "tolerance": {
         "rider_cost":24999,
-        "kitchen_optimality":20,
-        "user_satisfaction":0.005
+        "kitchen_optimality":40,
+        "user_satisfaction":0.009
     },
-    "best_archive_size":10,
+    "best_archive_size":30,
     "local_archive_size":2
 }

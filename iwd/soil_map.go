@@ -1,6 +1,8 @@
 package iwd
 
 import (
+	"math/rand"
+
 	"github.com/vroup/mo-iwd-sa/config"
 	"github.com/vroup/mo-iwd-sa/kitchen"
 	"github.com/vroup/mo-iwd-sa/order"
@@ -47,7 +49,7 @@ func NewSoilMap(kitchenList []*kitchen.Kitchen, orderList []*order.Order, conf *
 		for orderIdx := range orderList {
 			orderID := orderList[orderIdx].GetID()
 			key := kitchenID + "+" + orderID
-			sm[key] = iwdParam.InitSoil
+			sm[key] = rand.Float64() * iwdParam.InitSoil
 		}
 	}
 
@@ -58,7 +60,7 @@ func NewSoilMap(kitchenList []*kitchen.Kitchen, orderList []*order.Order, conf *
 				orderID1 := orderList[orderIdx1].GetID()
 				orderID2 := orderList[orderIdx2].GetID()
 				key := orderID1 + "+" + orderID2
-				sm[key] = iwdParam.InitSoil
+				sm[key] = rand.Float64() * iwdParam.InitSoil
 			}
 		}
 	}

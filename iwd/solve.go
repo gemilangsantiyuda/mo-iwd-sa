@@ -62,7 +62,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 		// optimize with local search all in the local archive
 
 		for arIdx := range localArchive.ElementList {
-			// optimizeInverse(localArchive.ElementList[arIdx].Wd, distCalc, config)
+			optimizeInverse(localArchive.ElementList[arIdx].Wd, distCalc, config)
 			newElement := localArchive.ElementList[arIdx]
 			bestArchive.LimitingInsert(newElement)
 		}
