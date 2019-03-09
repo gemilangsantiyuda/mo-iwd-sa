@@ -38,6 +38,6 @@
         "kitchen_optimality":40,
         "user_satisfaction":0.009
     },
-    "best_archive_size":30,
+    "best_archive_size":10,
     "local_archive_size":2
 }

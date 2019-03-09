@@ -1,8 +1,6 @@
 package iwd
 
 import (
-	"fmt"
-
 	"github.com/vroup/mo-iwd-sa/config"
 )
 
@@ -22,7 +20,7 @@ func optimizeInverse(iwd *WaterDrop, distCalc distanceCalculator, config *config
 				route.reverseOrders(startIdx, endIdx, distCalc, ksqMap, ratingMap, config)
 				repetition--
 				improvementFound = true
-				fmt.Println(repetition)
+				// fmt.Println(repetition)
 			}
 			if repetition == 0 {
 				break
@@ -59,7 +57,7 @@ func getImprovingReverseIndex(route *Route, distCalc distanceCalculator) (int, i
 			}
 
 			if newDistance < oldDistance-1 {
-				fmt.Print("new ", newDistance, " old ", oldDistance, " ")
+				// fmt.Print("new ", newDistance, " old ", oldDistance, " ")
 				return idx1, idx2
 			}
 		}
