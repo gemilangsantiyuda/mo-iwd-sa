@@ -56,17 +56,16 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			}
 		}
 
-		// bestArchive.ElementList = append(bestArchive.ElementList, localArchive.ElementList...)
-		// bestArchive.Update(config.ArchiveSize)
-
 		// optimize with local search all in the local archive
 
 		for arIdx := range localArchive.ElementList {
 			optimizeInverse(localArchive.ElementList[arIdx].Wd, distCalc, config)
-			newElement := localArchive.ElementList[arIdx]
-			bestArchive.ElementList = append(bestArchive.ElementList, newElement)
+			if localArchive.ElementList[arIdx].Wd.hasValidRouteList() {
+				newElement := localArchive.ElementList[arIdx]
+				bestArchive.ElementList = append(bestArchive.ElementList, newElement)
+			}
 		}
-
+		// logSolution(config, localArchive)
 		localArchive.Update(config.LocalArchiveSize)
 		bestArchive.Update(config.BestArchiveSize)
 		// fmt.Println(len(localArchive.ElementList))

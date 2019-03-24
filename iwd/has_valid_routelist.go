@@ -1,5 +1,10 @@
 package iwd
 
+import (
+	"fmt"
+	"log"
+)
+
 // check after traversing wether this waterdrop generate a valid routelist or not
 func (wd *WaterDrop) hasValidRouteList() bool {
 	tree := wd.Tree
@@ -42,6 +47,13 @@ func (wd *WaterDrop) hasValidRouteList() bool {
 		orderCount -= len(route.VisitedOrderList)
 		for odx := range route.VisitedOrderList {
 			totalOrderQty -= route.VisitedOrderList[odx].Quantity
+		}
+
+		for dx := range route.DistanceList {
+			if dx > 0 && route.DistanceList[dx] < route.DistanceList[dx-1] {
+				fmt.Println(route.DistanceList[dx-1], route.DistanceList[dx])
+				log.Fatal("Kecilllss")
+			}
 		}
 	}
 

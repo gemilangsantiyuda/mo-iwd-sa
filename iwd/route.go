@@ -1,6 +1,7 @@
 package iwd
 
 import (
+	"log"
 	"math"
 
 	"github.com/vroup/mo-iwd-sa/config"
@@ -64,14 +65,28 @@ func (route *Route) GetServedQty() int {
 
 // Split split the route exactly at the orderIDx, some kind of cutting the path into two returning the information about that path. Essential to cut-paste path (e.g 2-opt)
 func (route *Route) Split(ksqMap KitchenServedQtyMap, orderIdx int) ([]*order.Order, []float64, []int, []float64) {
-	newVisOrderList := route.VisitedOrderList[orderIdx:]
+
+	for idx := range route.DistanceList {
+		if idx > 0 && route.DistanceList[idx] < route.DistanceList[idx-1] {
+			log.Fatal("Kecils split")
+		}
+	}
 	// copy and cutting
+	cutLen := len(route.VisitedOrderList) - orderIdx
+	newVisOrderList := make([]*order.Order, cutLen)
+	copy(newVisOrderList, route.VisitedOrderList[orderIdx:])
 	route.VisitedOrderList = route.VisitedOrderList[:orderIdx]
-	newDistanceList := route.DistanceList[orderIdx:]
+
+	newDistanceList := make([]float64, cutLen)
+	copy(newDistanceList, route.DistanceList[orderIdx:])
 	route.DistanceList = route.DistanceList[:orderIdx]
-	newRatingList := route.RatingList[orderIdx:]
+
+	newRatingList := make([]float64, cutLen)
+	copy(newRatingList, route.RatingList[orderIdx:])
 	route.RatingList = route.RatingList[:orderIdx]
-	newServedQtyList := route.ServedQtyList[orderIdx:]
+
+	newServedQtyList := make([]int, cutLen)
+	copy(newServedQtyList, route.ServedQtyList[orderIdx:])
 	route.ServedQtyList = route.ServedQtyList[:orderIdx]
 
 	// because the lists are the sum of item 0 until idx .. F[idx] = sum(G[0]...G[idx]) then we have to remove the value of F[orderIdx-1] from the new list to remove the value from the other cut of the list
@@ -96,6 +111,11 @@ func (route *Route) Split(ksqMap KitchenServedQtyMap, orderIdx int) ([]*order.Or
 	kitchen := route.ServingKitchen
 	ksqMap.AddQty(kitchen, -removedQty)
 
+	for idx := range newDistanceList {
+		if idx > 0 && newDistanceList[idx] < newDistanceList[idx-1] {
+			log.Fatal("Kecils split")
+		}
+	}
 	return newVisOrderList, newDistanceList, newServedQtyList, newRatingList
 }
 
@@ -117,6 +137,7 @@ func (route *Route) AddPath(ksqMap KitchenServedQtyMap, ratingMap rating.Map, or
 	// new value is added by  the old route last index value which is the sum from 0 -> last idx
 
 	// adjust distance list
+
 	oldDist := route.DistanceList[oldLen]
 	for idx := oldLen; idx < newLen; idx++ {
 		route.DistanceList[idx] -= oldDist
