@@ -1,0 +1,167 @@
+[
+{
+"RiderCost": 1050000,
+"KitchenOptimality": 160,
+"UserSatisfaction": 0.2747608082362771
+},
+{
+"RiderCost": 1025000,
+"KitchenOptimality": 160,
+"UserSatisfaction": 0.27476080823627713
+},
+{
+"RiderCost": 1000000,
+"KitchenOptimality": 160,
+"UserSatisfaction": 0.27479085270773984
+},
+{
+"RiderCost": 500000,
+"KitchenOptimality": 82,
+"UserSatisfaction": 0.29087187385022395
+},
+{
+"RiderCost": 500000,
+"KitchenOptimality": 144,
+"UserSatisfaction": 0.27540463508780255
+},
+{
+"RiderCost": 575000,
+"KitchenOptimality": 165,
+"UserSatisfaction": 0.275267566606012
+},
+{
+"RiderCost": 475000,
+"KitchenOptimality": 94,
+"UserSatisfaction": 0.2837177621096701
+},
+{
+"RiderCost": 525000,
+"KitchenOptimality": 106,
+"UserSatisfaction": 0.27767564533974165
+},
+{
+"RiderCost": 500000,
+"KitchenOptimality": 126,
+"UserSatisfaction": 0.27571693079129733
+},
+{
+"RiderCost": 575000,
+"KitchenOptimality": 76,
+"UserSatisfaction": 0.2832918818925821
+},
+{
+"RiderCost": 525000,
+"KitchenOptimality": 166,
+"UserSatisfaction": 0.2728612020527649
+},
+{
+"RiderCost": 550000,
+"KitchenOptimality": 84,
+"UserSatisfaction": 0.2846778385740866
+},
+{
+"RiderCost": 475000,
+"KitchenOptimality": 256,
+"UserSatisfaction": 0.27676784690362743
+},
+{
+"RiderCost": 550000,
+"KitchenOptimality": 125,
+"UserSatisfaction": 0.2762731147704624
+},
+{
+"RiderCost": 450000,
+"KitchenOptimality": 175,
+"UserSatisfaction": 0.2799164283301864
+},
+{
+"RiderCost": 500000,
+"KitchenOptimality": 94,
+"UserSatisfaction": 0.2779880221898722
+},
+{
+"RiderCost": 425000,
+"KitchenOptimality": 125,
+"UserSatisfaction": 0.289563825738666
+},
+{
+"RiderCost": 475000,
+"KitchenOptimality": 111,
+"UserSatisfaction": 0.28273707797489633
+},
+{
+"RiderCost": 500000,
+"KitchenOptimality": 88,
+"UserSatisfaction": 0.2903182436166955
+},
+{
+"RiderCost": 525000,
+"KitchenOptimality": 76,
+"UserSatisfaction": 0.2924953852992585
+},
+{
+"RiderCost": 525000,
+"KitchenOptimality": 80,
+"UserSatisfaction": 0.2877831508834996
+},
+{
+"RiderCost": 450000,
+"KitchenOptimality": 104,
+"UserSatisfaction": 0.28494660917893233
+},
+{
+"RiderCost": 450000,
+"KitchenOptimality": 132,
+"UserSatisfaction": 0.28196095614027494
+},
+{
+"RiderCost": 450000,
+"KitchenOptimality": 126,
+"UserSatisfaction": 0.28400336805130705
+},
+{
+"RiderCost": 450000,
+"KitchenOptimality": 94,
+"UserSatisfaction": 0.29647997873565457
+},
+{
+"RiderCost": 475000,
+"KitchenOptimality": 125,
+"UserSatisfaction": 0.2783545417036805
+},
+{
+"RiderCost": 600000,
+"KitchenOptimality": 111,
+"UserSatisfaction": 0.2767477528237228
+},
+{
+"RiderCost": 575000,
+"KitchenOptimality": 92,
+"UserSatisfaction": 0.2832111662892609
+},
+{
+"RiderCost": 425000,
+"KitchenOptimality": 108,
+"UserSatisfaction": 0.293355931489546
+},
+{
+"RiderCost": 425000,
+"KitchenOptimality": 146,
+"UserSatisfaction": 0.28842044100507525
+},
+{
+"RiderCost": 475000,
+"KitchenOptimality": 157,
+"UserSatisfaction": 0.2771436258505682
+},
+{
+"RiderCost": 425000,
+"KitchenOptimality": 182,
+"UserSatisfaction": 0.28565411021071074
+},
+{
+"RiderCost": 400000,
+"KitchenOptimality": 168,
+"UserSatisfaction": 0.29175829921575064
+}
+]

@@ -21,7 +21,7 @@ func (ar *Archive) Update(maxSize int) {
 		for idx2 := range ar.ElementList {
 			if idx1 != idx2 {
 				wd2 := ar.ElementList[idx2].Wd
-				if wd1.Score.IsDominate(wd2.Score, wd1.Config.Tolerance) {
+				if wd1.Score.IsDominate(wd2.Score) {
 					SFit[idx1] += 1.
 				}
 			}
@@ -34,7 +34,7 @@ func (ar *Archive) Update(maxSize int) {
 		for idx2 := range ar.ElementList {
 			if idx1 != idx2 {
 				wd2 := ar.ElementList[idx2].Wd
-				if wd2.Score.IsDominate(wd1.Score, wd1.Config.Tolerance) {
+				if wd2.Score.IsDominate(wd1.Score) {
 					RFit[idx1] += SFit[idx2]
 				}
 			}
@@ -119,9 +119,10 @@ func calcDiffList(wg *sync.WaitGroup, archive *Archive, currentIdx int, diffList
 	defer wg.Done()
 
 	currentScore := archive.ElementList[currentIdx].Wd.Score
+	conf := archive.ElementList[currentIdx].Wd.Config
 	for idx := range archive.ElementList {
 		score := archive.ElementList[idx].Wd.Score
-		diff := currentScore.GetDifference(score)
+		diff := currentScore.GetDifference(score, conf)
 		diffList[idx] = diff
 	}
 

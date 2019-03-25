@@ -3,6 +3,7 @@ package iwd
 import (
 	"fmt"
 	"math/rand"
+	"time"
 
 	"github.com/vroup/mo-iwd-sa/config"
 	"github.com/vroup/mo-iwd-sa/kitchen"
@@ -12,14 +13,20 @@ import (
 )
 
 // Solve the mdovrp returning the best waterdrop
-func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, distCalc distanceCalculator, config *config.Config) []*WaterDrop {
+func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap rating.Map, tree *mtree.Tree, distCalc distanceCalculator, referencePoint []*Score, startTime time.Time, config *config.Config) []*WaterDrop {
 
 	bestArchive := &Archive{
 		ElementList: make([]*ArchiveElement, 0),
 	}
 
 	soilMap := NewSoilMap(kitchenList, orderList, config)
+	// oldIGD := math.Inf(1)
+	// igdStaticCount := 0
 	for iter := 0; iter < config.IwdParameter.MaximumIteration; iter++ {
+		relapsedTime := time.Since(startTime)
+		if relapsedTime.Seconds() > 2.*3600. /*|| igdStaticCount == 50 */ {
+			break
+		}
 		finishedWaterDrops := make([]*WaterDrop, 0)
 		workingWaterDrops := initWaterDrops(soilMap, ratingMap, orderList, kitchenList, tree, distCalc, config)
 
@@ -65,7 +72,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 				bestArchive.ElementList = append(bestArchive.ElementList, newElement)
 			}
 		}
-		// logSolution(config, localArchive)
+		logSolution(config, localArchive)
 		localArchive.Update(config.LocalArchiveSize)
 		bestArchive.Update(config.BestArchiveSize)
 		// fmt.Println(len(localArchive.ElementList))
@@ -73,7 +80,7 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			element := localArchive.ElementList[arIdx]
 			wd := element.Wd
 			fitness := element.Fitness
-			if fitness > 1 {
+			if fitness >= 1 {
 				prob := getSAProb(config, fitness)
 				r := rand.Float64()
 				if r <= prob {
@@ -82,25 +89,33 @@ func Solve(orderList []*order.Order, kitchenList []*kitchen.Kitchen, ratingMap r
 			}
 		}
 
-		fmt.Println("Best Archive Iteration ", iter)
+		fmt.Println("Iteration ", iter, "Time ", relapsedTime)
 		for arIdx := range bestArchive.ElementList {
 			element := bestArchive.ElementList[arIdx]
-			fmt.Printf("%+v fit: %f\n", element.Wd.Score, element.Fitness)
+			// fmt.Printf("%+v fit: %f\n", element.Wd.Score, element.Fitness)
 			ksqMap := element.Wd.KitchenServedQtyMap
 			totalServedQty := 0
 			for kdx := range kitchenList {
 				svKitchen := kitchenList[kdx]
 				totalServedQty += ksqMap.GetServedQty(svKitchen)
-
 			}
-			fmt.Println("total Served : ", totalServedQty)
+			// fmt.Println("total Served : ", totalServedQty)
 		}
 		updateTemperature(config)
+		igdValue := bestArchive.getIGD(referencePoint, config)
+		// if math.Abs(igdValue-oldIGD) < 0.00001 {
+		// 	igdStaticCount++
+		// } else {
+		// 	igdStaticCount = 0
+		// }
+		// oldIGD = igdValue
+		fmt.Println("IGD VALUE :", igdValue)
 	}
 
 	solutionList := make([]*WaterDrop, 0)
 	for idx := range bestArchive.ElementList {
 		solutionList = append(solutionList, bestArchive.ElementList[idx].Wd)
 	}
+
 	return solutionList
 }

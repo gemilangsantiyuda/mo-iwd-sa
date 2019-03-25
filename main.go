@@ -22,9 +22,10 @@ func main() {
 	ratingMap := rating.GetRatingMap(config)
 	distCalc := &distance.HaversineDistance{}
 	tree := mtree.NewTree(config.MinTreeEntry, config.MaxTreeEntry, distCalc)
+	referencePoint := iwd.ReadRF(config)
 
-	currentSeed := int64(1551319497440281112)
-	// currentSeed := time.Now().UTC().UnixNano()
+	// currentSeed := int64(1551319497440281112)
+	currentSeed := time.Now().UTC().UnixNano()
 	fmt.Println(currentSeed)
 	rand.Seed(currentSeed)
 
@@ -33,7 +34,7 @@ func main() {
 		tree.Insert(order)
 	}
 
-	bestWDs := iwd.Solve(orderList, kitchenList, ratingMap, tree, distCalc, config)
+	bestWDs := iwd.Solve(orderList, kitchenList, ratingMap, tree, distCalc, referencePoint, start, config)
 	if bestWDs == nil {
 		return
 	}

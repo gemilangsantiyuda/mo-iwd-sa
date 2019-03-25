@@ -1,14 +1,15 @@
 {
-    "data_size":"small",
+    "data_size":"large",
+    "log_id":"3",
     "max_driver_capacity":40,
     "max_driver_distance":90000,
     "driver_speed":30000,
     "driver_rate":25000,
-    "neighbour_count":10,
-    "max_tree_entry":15,
-    "min_tree_entry":8,
+    "neighbour_count":5,
+    "max_tree_entry":20,
+    "min_tree_entry":10,
     "iwd_parameter":{
-        "maximum_iteration":10000,
+        "maximum_iteration":1000000,
         "population_size":10,
         "as":1,
         "bs":0.01,
@@ -22,7 +23,7 @@
         "p" : 0.9,
         "min_d_soil":-99999999,
         "max_d_soil":9999999,
-        "max_ls_repetition":50
+        "max_ls_repetition":100
     },
     "weight":{
         "rider_cost" : 1,
@@ -30,14 +31,9 @@
         "user_satisfaction":0
     },
     "sa_parameter":{
-        "temp":20,
-        "cooling_rate": 0.999
+        "temp":50,
+        "cooling_rate": 0.99
     },
-    "tolerance": {
-        "rider_cost":24999,
-        "kitchen_optimality":40,
-        "user_satisfaction":0.009
-    },
-    "best_archive_size":10,
-    "local_archive_size":2
+    "best_archive_size":16,
+    "local_archive_size":4
 }

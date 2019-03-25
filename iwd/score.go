@@ -35,12 +35,14 @@ func (score *Score) IsWorseThan(newScore *Score) bool {
 }
 
 // IsDominate return wether the score dominate the newscore
-func (score *Score) IsDominate(newScore *Score, tolerance config.Tolerance) bool {
+func (score *Score) IsDominate(newScore *Score) bool {
 	// return (score.RiderCost <= tolerance.RiderCost+newScore.RiderCost) && (score.KitchenOptimality <= tolerance.KitchenOptimality+newScore.KitchenOptimality) && (score.UserSatisfaction <= tolerance.UserSatisfaction+newScore.UserSatisfaction)
 	return ((score.RiderCost <= newScore.RiderCost) && (score.KitchenOptimality <= newScore.KitchenOptimality) && (score.UserSatisfaction <= newScore.UserSatisfaction)) && ((score.RiderCost < newScore.RiderCost) || (score.KitchenOptimality < newScore.KitchenOptimality) || (score.UserSatisfaction < newScore.UserSatisfaction))
 }
 
 // GetDifference return the difference between the 2 scores
-func (score *Score) GetDifference(score2 *Score) float64 {
-	return math.Abs(float64(score.RiderCost-score2.RiderCost)) + math.Abs(float64(score.KitchenOptimality-score2.KitchenOptimality)) + math.Abs(score.UserSatisfaction-score2.UserSatisfaction)
+func (score *Score) GetDifference(score2 *Score, conf *config.Config) float64 {
+	diff := math.Abs(float64(score.RiderCost-score2.RiderCost)/float64(conf.MaxValue.RiderCost)) + math.Abs(float64(score.KitchenOptimality-score2.KitchenOptimality)/float64(conf.MaxValue.KitchenOptimality)) + math.Abs(score.UserSatisfaction-score2.UserSatisfaction)/conf.MaxValue.UserSatisfaction
+	// fmt.Println(diff)
+	return diff
 }

@@ -3,6 +3,7 @@ package config
 // Config for the solver, to be added : iwd-sa constants
 type Config struct {
 	DataSize          string       `json:"data_size"`
+	LogID             string       `json:"log_id"`
 	MaxDriverCapacity int          `json:"max_driver_capacity"`
 	MaxDriverDistance float64      `json:"max_driver_distance"`
 	MaxTreeEntry      int          `json:"max_tree_entry"`
@@ -13,7 +14,7 @@ type Config struct {
 	IwdParameter      IwdParameter `json:"iwd_parameter"`
 	Weight            Weight       `json:"weight"`
 	SaParam           SaParameter  `json:"sa_parameter"`
-	Tolerance         Tolerance    `json:"tolerance"`
+	MaxValue          MaxValue     `json:"max_value"`
 	BestArchiveSize   int          `json:"best_archive_size"`
 	LocalArchiveSize  int          `json:"local_archive_size"`
 }

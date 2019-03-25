@@ -19,7 +19,17 @@ func ReadConfig() *Config {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	json.Unmarshal(jsonBytes, &conf)
+
+	maxVFile, err := os.Open("prepared data/max_value_" + conf.DataSize + ".json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer maxVFile.Close()
+	jsonBytes, err = ioutil.ReadAll(maxVFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	json.Unmarshal(jsonBytes, &conf.MaxValue)
 	return &conf
 }

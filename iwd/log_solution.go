@@ -9,7 +9,7 @@ import (
 )
 
 func logSolution(conf *config.Config, archive *Archive) {
-	logName := "solution_log_" + conf.DataSize
+	logName := "solution_log_" + conf.LogID + "_" + conf.DataSize
 	f, err := os.OpenFile(logName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -24,7 +24,7 @@ func logSolution(conf *config.Config, archive *Archive) {
 			if err != nil {
 				log.Fatal(err)
 			}
-			if _, err := f.WriteString(string(scoreLog) + "\n"); err != nil {
+			if _, err := f.WriteString(string(scoreLog) + ",\n"); err != nil {
 				log.Println(err)
 			}
 		}
