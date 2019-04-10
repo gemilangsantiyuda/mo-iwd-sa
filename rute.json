@@ -1,0 +1,914 @@
+[
+ {
+  "ServingKitchen": {
+   "ID": "161",
+   "Capacity": {
+    "Minimum": 20,
+    "Optimum": 45,
+    "Maximum": 50
+   },
+   "Preference": 0,
+   "Coordinate": {
+    "Latitude": -6.1928965,
+    "Longitude": 106.7938203
+   }
+  },
+  "VisitedOrderList": [
+   {
+    "ID": "22824",
+    "UserID": "24448",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1757267,
+     "Longitude": 106.8114983
+    }
+   },
+   {
+    "ID": "22917",
+    "UserID": "10923",
+    "Quantity": 3,
+    "Coordinate": {
+     "Latitude": -6.130553,
+     "Longitude": 106.821312
+    }
+   },
+   {
+    "ID": "22236",
+    "UserID": "23581",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1418555,
+     "Longitude": 106.8281622
+    }
+   },
+   {
+    "ID": "22950",
+    "UserID": "24260",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.16563,
+     "Longitude": 106.839276
+    }
+   },
+   {
+    "ID": "22292",
+    "UserID": "1071",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.16563,
+     "Longitude": 106.839276
+    }
+   },
+   {
+    "ID": "22819",
+    "UserID": "9931",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1788227,
+     "Longitude": 106.8648707
+    }
+   },
+   {
+    "ID": "22647",
+    "UserID": "18087",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.1948194,
+     "Longitude": 106.8955104
+    }
+   },
+   {
+    "ID": "22799",
+    "UserID": "24419",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.190941,
+     "Longitude": 106.827475
+    }
+   },
+   {
+    "ID": "22886",
+    "UserID": "22763",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1925529,
+     "Longitude": 106.8223526
+    }
+   },
+   {
+    "ID": "22920",
+    "UserID": "20366",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2146862,
+     "Longitude": 106.8310865
+    }
+   },
+   {
+    "ID": "22929",
+    "UserID": "24519",
+    "Quantity": 3,
+    "Coordinate": {
+     "Latitude": -6.2174223,
+     "Longitude": 106.8301777
+    }
+   },
+   {
+    "ID": "22902",
+    "UserID": "23524",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2278787,
+     "Longitude": 106.8255871
+    }
+   },
+   {
+    "ID": "22945",
+    "UserID": "18023",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.22927,
+     "Longitude": 106.825108
+    }
+   },
+   {
+    "ID": "22487",
+    "UserID": "23486",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2386502,
+     "Longitude": 106.8240774
+    }
+   },
+   {
+    "ID": "22762",
+    "UserID": "11661",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2257804,
+     "Longitude": 106.8189988
+    }
+   },
+   {
+    "ID": "22503",
+    "UserID": "20764",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2302354,
+     "Longitude": 106.8117875
+    }
+   },
+   {
+    "ID": "22919",
+    "UserID": "6",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2308763,
+     "Longitude": 106.8096101
+    }
+   },
+   {
+    "ID": "22871",
+    "UserID": "6789",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2308763,
+     "Longitude": 106.8096101
+    }
+   },
+   {
+    "ID": "22872",
+    "UserID": "15108",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2308763,
+     "Longitude": 106.8096101
+    }
+   },
+   {
+    "ID": "22727",
+    "UserID": "12543",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.227064,
+     "Longitude": 106.8081298
+    }
+   },
+   {
+    "ID": "22539",
+    "UserID": "19174",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2248166,
+     "Longitude": 106.8102021
+    }
+   },
+   {
+    "ID": "22948",
+    "UserID": "24264",
+    "Quantity": 5,
+    "Coordinate": {
+     "Latitude": -6.223694,
+     "Longitude": 106.809119
+    }
+   },
+   {
+    "ID": "22909",
+    "UserID": "17058",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2251,
+     "Longitude": 106.80557
+    }
+   },
+   {
+    "ID": "22542",
+    "UserID": "9802",
+    "Quantity": 6,
+    "Coordinate": {
+     "Latitude": -6.2254512,
+     "Longitude": 106.8051631
+    }
+   }
+  ],
+  "DistanceList": [
+   3416.0449110476334,
+   9841.510606271297,
+   11676.19525618328,
+   15321.202880694564,
+   15321.202880694564,
+   19306.29304243791,
+   24089.878508776084,
+   33509.28625126314,
+   34251.9351188837,
+   37557.50902631738,
+   37958.118784231476,
+   39544.32740490644,
+   39748.78385046413,
+   41060.69611693891,
+   42982.772779397375,
+   44156.24568068003,
+   44470.10247337311,
+   44470.10247337311,
+   44470.10247337311,
+   45038.2544067395,
+   45462.127615440564,
+   45678.391830666995,
+   46206.42732579353,
+   46280.90566758525
+  ],
+  "RatingList": [
+   3,
+   6,
+   9,
+   12,
+   15,
+   18,
+   21,
+   24,
+   27,
+   30,
+   33,
+   36,
+   39.625,
+   42.625,
+   46.07954545454545,
+   50.17045454545455,
+   53.17045454545455,
+   58.17045454545455,
+   61.50378787878788,
+   65.58071095571096,
+   69.56316709606183,
+   72.56316709606183,
+   75.56316709606183,
+   79.56316709606183
+  ],
+  "RiderCost": 50000,
+  "ServedQtyList": [
+   1,
+   4,
+   5,
+   6,
+   7,
+   8,
+   10,
+   11,
+   12,
+   13,
+   16,
+   17,
+   19,
+   20,
+   21,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   33,
+   34,
+   40
+  ]
+ },
+ {
+  "ServingKitchen": {
+   "ID": "161",
+   "Capacity": {
+    "Minimum": 20,
+    "Optimum": 45,
+    "Maximum": 50
+   },
+   "Preference": 0,
+   "Coordinate": {
+    "Latitude": -6.1928965,
+    "Longitude": 106.7938203
+   }
+  },
+  "VisitedOrderList": [
+   {
+    "ID": "22924",
+    "UserID": "24386",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2216509,
+     "Longitude": 106.791309
+    }
+   },
+   {
+    "ID": "22913",
+    "UserID": "23877",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2251267,
+     "Longitude": 106.79912
+    }
+   },
+   {
+    "ID": "22338",
+    "UserID": "24101",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2257826,
+     "Longitude": 106.8047944
+    }
+   },
+   {
+    "ID": "22553",
+    "UserID": "10562",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2279504,
+     "Longitude": 106.79954
+    }
+   },
+   {
+    "ID": "22930",
+    "UserID": "19477",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2354237,
+     "Longitude": 106.7805878
+    }
+   },
+   {
+    "ID": "22968",
+    "UserID": "24193",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.239634,
+     "Longitude": 106.795157
+    }
+   },
+   {
+    "ID": "22620",
+    "UserID": "3472",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2535892,
+     "Longitude": 106.8011494
+    }
+   },
+   {
+    "ID": "22845",
+    "UserID": "21425",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2632031,
+     "Longitude": 106.7920538
+    }
+   }
+  ],
+  "DistanceList": [
+   4012.8487506971264,
+   5195.657987341737,
+   5985.217891639457,
+   6771.501233847133,
+   9589.461834208572,
+   11686.429084080559,
+   13796.027949260028,
+   15630.914310787804
+  ],
+  "RatingList": [
+   3,
+   7,
+   10.2,
+   14.7,
+   17.7,
+   20.7,
+   23.7,
+   26.7
+  ],
+  "RiderCost": 25000,
+  "ServedQtyList": [
+   1,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   10
+  ]
+ },
+ {
+  "ServingKitchen": {
+   "ID": "156",
+   "Capacity": {
+    "Minimum": 20,
+    "Optimum": 45,
+    "Maximum": 50
+   },
+   "Preference": 0,
+   "Coordinate": {
+    "Latitude": -6.1841235,
+    "Longitude": 106.8472257
+   }
+  },
+  "VisitedOrderList": [
+   {
+    "ID": "22685",
+    "UserID": "9205",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.203403,
+     "Longitude": 106.8234996
+    }
+   },
+   {
+    "ID": "22580",
+    "UserID": "18917",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2329071,
+     "Longitude": 106.8311583
+    }
+   },
+   {
+    "ID": "22664",
+    "UserID": "7847",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2455234,
+     "Longitude": 106.8262725
+    }
+   },
+   {
+    "ID": "22472",
+    "UserID": "23443",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2449234,
+     "Longitude": 106.8082136
+    }
+   },
+   {
+    "ID": "22990",
+    "UserID": "3220",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2448803,
+     "Longitude": 106.8036754
+    }
+   },
+   {
+    "ID": "22431",
+    "UserID": "18403",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2642921,
+     "Longitude": 106.8084818
+    }
+   },
+   {
+    "ID": "22753",
+    "UserID": "24090",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2825316,
+     "Longitude": 106.7920789
+    }
+   },
+   {
+    "ID": "22683",
+    "UserID": "659",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.272818,
+     "Longitude": 106.77766
+    }
+   },
+   {
+    "ID": "22869",
+    "UserID": "24410",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.26982,
+     "Longitude": 106.753618
+    }
+   },
+   {
+    "ID": "22900",
+    "UserID": "24036",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2872015,
+     "Longitude": 106.7790688
+    }
+   },
+   {
+    "ID": "22877",
+    "UserID": "24152",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2906819,
+     "Longitude": 106.7955595
+    }
+   },
+   {
+    "ID": "22817",
+    "UserID": "20783",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2812623,
+     "Longitude": 106.8248378
+    }
+   },
+   {
+    "ID": "22644",
+    "UserID": "7255",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.283604,
+     "Longitude": 106.829721
+    }
+   },
+   {
+    "ID": "22893",
+    "UserID": "24278",
+    "Quantity": 8,
+    "Coordinate": {
+     "Latitude": -6.2854557,
+     "Longitude": 106.8336432
+    }
+   },
+   {
+    "ID": "22921",
+    "UserID": "2450",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.298252,
+     "Longitude": 106.829844
+    }
+   },
+   {
+    "ID": "22873",
+    "UserID": "24016",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.3016702,
+     "Longitude": 106.832956
+    }
+   },
+   {
+    "ID": "22534",
+    "UserID": "12740",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.300677,
+     "Longitude": 106.8331925
+    }
+   },
+   {
+    "ID": "22934",
+    "UserID": "24522",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.300677,
+     "Longitude": 106.8331925
+    }
+   },
+   {
+    "ID": "22910",
+    "UserID": "23589",
+    "Quantity": 6,
+    "Coordinate": {
+     "Latitude": -6.2910688,
+     "Longitude": 106.8421925
+    }
+   },
+   {
+    "ID": "22999",
+    "UserID": "23126",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.3097912,
+     "Longitude": 106.8609588
+    }
+   },
+   {
+    "ID": "22931",
+    "UserID": "24521",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2627893,
+     "Longitude": 106.8667797
+    }
+   },
+   {
+    "ID": "22859",
+    "UserID": "14246",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.269236,
+     "Longitude": 106.846511
+    }
+   },
+   {
+    "ID": "22852",
+    "UserID": "16550",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2593116,
+     "Longitude": 106.8454504
+    }
+   },
+   {
+    "ID": "22823",
+    "UserID": "18163",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2318597,
+     "Longitude": 106.8473377
+    }
+   },
+   {
+    "ID": "22936",
+    "UserID": "23945",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1820073,
+     "Longitude": 106.8794528
+    }
+   }
+  ],
+  "DistanceList": [
+   4235.5422069166625,
+   8471.963485382736,
+   10351.532973194675,
+   12848.807940694853,
+   13476.051701000319,
+   16255.476981496915,
+   19656.876600994554,
+   22064.085644126528,
+   25412.755053109464,
+   29680.211711780605,
+   32009.970413873183,
+   36262.81279736132,
+   37012.09133747576,
+   37612.16149262749,
+   39467.1226159684,
+   40108.06319483121,
+   40249.96567520267,
+   40249.96567520267,
+   42075.18478996685,
+   45749.604275886944,
+   52333.74231336369,
+   55274.82681265034,
+   56662.408835851544,
+   60488.02954736736,
+   68718.71393984891
+  ],
+  "RatingList": [
+   4,
+   9,
+   12,
+   15,
+   19.125,
+   23.125,
+   26.125,
+   29.125,
+   32.125,
+   35.125,
+   39.05357142857143,
+   42.05357142857143,
+   46.05357142857143,
+   49.05357142857143,
+   52.05357142857143,
+   55.55357142857143,
+   60.05357142857143,
+   63.05357142857143,
+   66.05357142857143,
+   67.05357142857143,
+   70.05357142857143,
+   74.05357142857143,
+   78.05357142857143,
+   82.25357142857143,
+   86.75357142857143
+  ],
+  "RiderCost": 75000,
+  "ServedQtyList": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11,
+   13,
+   14,
+   15,
+   23,
+   24,
+   25,
+   26,
+   27,
+   33,
+   34,
+   35,
+   36,
+   38,
+   39,
+   40
+  ]
+ },
+ {
+  "ServingKitchen": {
+   "ID": "104",
+   "Capacity": {
+    "Minimum": 60,
+    "Optimum": 100,
+    "Maximum": 105
+   },
+   "Preference": 0,
+   "Coordinate": {
+    "Latitude": -6.1574728,
+    "Longitude": 106.7959925
+   }
+  },
+  "VisitedOrderList": [
+   {
+    "ID": "22891",
+    "UserID": "20912",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1049406,
+     "Longitude": 106.7517141
+    }
+   },
+   {
+    "ID": "22692",
+    "UserID": "20913",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1050809,
+     "Longitude": 106.7515751
+    }
+   },
+   {
+    "ID": "22866",
+    "UserID": "21913",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1513306,
+     "Longitude": 106.7126342
+    }
+   },
+   {
+    "ID": "22550",
+    "UserID": "1640",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.1667956,
+     "Longitude": 106.7088362
+    }
+   },
+   {
+    "ID": "22885",
+    "UserID": "9296",
+    "Quantity": 10,
+    "Coordinate": {
+     "Latitude": -6.1579018,
+     "Longitude": 106.7647341
+    }
+   },
+   {
+    "ID": "22922",
+    "UserID": "8909",
+    "Quantity": 2,
+    "Coordinate": {
+     "Latitude": -6.2413726,
+     "Longitude": 106.7873664
+    }
+   },
+   {
+    "ID": "22659",
+    "UserID": "22550",
+    "Quantity": 1,
+    "Coordinate": {
+     "Latitude": -6.2250869,
+     "Longitude": 106.8256162
+    }
+   },
+   {
+    "ID": "22665",
+    "UserID": "14968",
+    "Quantity": 3,
+    "Coordinate": {
+     "Latitude": -6.235609,
+     "Longitude": 106.8458341
+    }
+   }
+  ],
+  "DistanceList": [
+   9529.430327403712,
+   9556.81189424858,
+   17942.8685849194,
+   20156.17929319565,
+   27981.238405796976,
+   40000.65039665294,
+   45751.681126216004,
+   48905.810041461125
+  ],
+  "RatingList": [
+   3,
+   6,
+   9,
+   12,
+   15,
+   18,
+   21,
+   24
+  ],
+  "RiderCost": 50000,
+  "ServedQtyList": [
+   1,
+   2,
+   3,
+   4,
+   14,
+   16,
+   17,
+   20
+  ]
+ },
+ {
+  "ServingKitchen": {
+   "ID": "104",
+   "Capacity": {
+    "Minimum": 60,
+    "Optimum": 100,
+    "Maximum": 105
+   },
+   "Preference": 0,
+   "Coordinate": {
+    "Latitude": -6.1574728,
+    "Longitude": 106.7959925
+   }
+  },
+  "VisitedOrderList": [
+   {
+    "ID": "22885-1",
+    "UserID": "9296",
+    "Quantity": 40,
+    "Coordinate": {
+     "Latitude": -6.1579018,
+     "Longitude": 106.7647341
+    }
+   }
+  ],
+  "DistanceList": [
+   4321.284374289753
+  ],
+  "RatingList": [
+   3
+  ],
+  "RiderCost": 25000,
+  "ServedQtyList": [
+   40
+  ]
+ }
+]

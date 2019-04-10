@@ -7,7 +7,7 @@ func (tree *Tree) Insert(object Object) {
 	newLeafEntry := &leafEntry{
 		object: object,
 	}
-	// fmt.Println("new Leaf ", newLeafEntry)
+
 	newNode1, newNode2 := tree.insertNewLeafEntry(tree.root, newLeafEntry)
 	if newNode1 != nil {
 		newRoot := &branch{}
@@ -21,7 +21,6 @@ func (tree *Tree) Insert(object Object) {
 	}
 
 	tree.ObjectCount++
-	// traverse(tree.root)
 }
 
 func (tree *Tree) insertNewLeafEntry(currentNode node, newLeafEntry *leafEntry) (node, node) {

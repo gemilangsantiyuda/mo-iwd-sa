@@ -30,6 +30,6 @@ import (
 func getSAProb(config *config.Config, fitness float64) float64 {
 	temp := config.SaParam.Temp
 	prob := math.Exp(-fitness / temp)
-	// fmt.Println("temperature : ", temp, " prob ", prob, " from fit ", fitness)
+	
 	return prob
 }

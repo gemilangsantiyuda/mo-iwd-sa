@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -15,54 +14,27 @@ import (
 )
 
 func main() {
-	start := time.Now()
+
+	currentSeed := time.Now().UTC().UnixNano()
+	// fmt.Println(currentSeed)
+	rand.Seed(currentSeed)
+	startTime := time.Now()
 	config := config.ReadConfig()
+	config.MinTreeEntry = config.MaxTreeEntry / 2
+	config.ReadMaxValue()
 	orderList := order.GetOrderList(config)
 	kitchenList := kitchen.GetKitchenList(config)
 	ratingMap := rating.GetRatingMap(config)
 	distCalc := &distance.HaversineDistance{}
 	tree := mtree.NewTree(config.MinTreeEntry, config.MaxTreeEntry, distCalc)
 	referencePoint := iwd.ReadRF(config)
-
+	config.BestArchiveSize = len(referencePoint)
 	// currentSeed := int64(1551319497440281112)
-	currentSeed := time.Now().UTC().UnixNano()
-	fmt.Println(currentSeed)
-	rand.Seed(currentSeed)
 
 	for idx := range orderList {
 		order := orderList[idx]
 		tree.Insert(order)
 	}
-
-	bestWDs := iwd.Solve(orderList, kitchenList, ratingMap, tree, distCalc, referencePoint, start, config)
-	if bestWDs == nil {
-		return
-	}
-	bestWD := bestWDs[0]
-	fmt.Println(bestWD.Soil)
-	fmt.Println("---------------")
-	for idx := range bestWD.RouteList {
-		route := bestWD.RouteList[idx]
-		fmt.Println("Route", idx+1)
-		fmt.Println("	Serving Kitchen : ", route.ServingKitchen.ID)
-		fmt.Println("	Order visited :")
-		fmt.Print("	-->")
-		for odx := range route.VisitedOrderList {
-			order := route.VisitedOrderList[odx]
-			fmt.Print(order.ID, ",")
-		}
-		fmt.Println()
-		fmt.Println("	Distance Traveled: ", route.GetDistanceTraveled())
-		fmt.Println("	Served Qty: ", route.GetServedQty())
-	}
-	fmt.Println("-----------------")
-
-	fmt.Println("Kitchen and Served Qty")
-	ksqMap := bestWD.KitchenServedQtyMap
-	for idx := range kitchenList {
-		kitchen := kitchenList[idx]
-		fmt.Println(kitchen.ID, " cap ", kitchen.Capacity, " served qty ", ksqMap.GetServedQty(kitchen))
-	}
-	fmt.Println("relapsed Time :", time.Since(start))
+	iwd.Solve(0, orderList, kitchenList, ratingMap, tree, distCalc, referencePoint, startTime, config, nil)
 
 }

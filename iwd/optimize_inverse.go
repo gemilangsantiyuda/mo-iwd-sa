@@ -1,10 +1,13 @@
 package iwd
 
 import (
+	"sync"
+
 	"github.com/vroup/mo-iwd-sa/config"
 )
 
-func optimizeInverse(iwd *WaterDrop, distCalc distanceCalculator, config *config.Config) {
+func optimizeInverse(iwd *WaterDrop, distCalc distanceCalculator, config *config.Config, wg *sync.WaitGroup) {
+	defer wg.Done()
 	repetition := config.IwdParameter.MaxLSRepetition
 	ksqMap := iwd.KitchenServedQtyMap
 	ratingMap := iwd.RatingMap

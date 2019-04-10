@@ -6,12 +6,8 @@ func nextStepWD(workingWaterDrops, finishedWaterDrops []*WaterDrop) ([]*WaterDro
 
 	for wdIdx := range workingWaterDrops {
 		wd := workingWaterDrops[wdIdx]
-		// fmt.Println(wd)
-		// fmt.Println(wd.Soil, wd.Velocity)
 		currentRoute := wd.getCurrentRoute()
-		// fmt.Println(currentRoute)
 		currentNode := wd.getCurrentNode(currentRoute)
-		// fmt.Println(currentNode)
 		nextOrder, distance, moDistance := wd.getNextOrder(currentRoute, currentNode)
 		// if no order can be visited anymore then create a new route,, and if no route can be created anymore the water drop is finished traversing
 		if nextOrder == nil {

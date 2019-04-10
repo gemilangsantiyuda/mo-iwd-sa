@@ -1,30 +1,5 @@
 [
 {
-"RiderCost": 2675000,
-"KitchenOptimality": 913,
-"UserSatisfaction": 0.28783251006679844
-},
-{
-"RiderCost": 2625000,
-"KitchenOptimality": 919,
-"UserSatisfaction": 0.2880696659122404
-},
-{
-"RiderCost": 2650000,
-"KitchenOptimality": 913,
-"UserSatisfaction": 0.2882043335639524
-},
-{
-"RiderCost": 2600000,
-"KitchenOptimality": 919,
-"UserSatisfaction": 0.2883113914967664
-},
-{
-"RiderCost": 2625000,
-"KitchenOptimality": 913,
-"UserSatisfaction": 0.28826111587859043
-},
-{
 "RiderCost": 1600000,
 "KitchenOptimality": 851,
 "UserSatisfaction": 0.2885117249801092
